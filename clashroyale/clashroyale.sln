@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panni", "Panni\Panni.csproj", "{0E0CE7AB-21D4-4AE9-8AF6-6DD07C463245}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E0CE7AB-21D4-4AE9-8AF6-6DD07C463245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E0CE7AB-21D4-4AE9-8AF6-6DD07C463245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E0CE7AB-21D4-4AE9-8AF6-6DD07C463245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E0CE7AB-21D4-4AE9-8AF6-6DD07C463245}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
