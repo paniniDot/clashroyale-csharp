@@ -2,14 +2,11 @@
 
 public class ElixirController
 {
-    private static Timer? _timer;
     private static int _elixir;
     private static bool _run;
-    private static readonly ConsoleColor DefaultC = Console.ForegroundColor;
 
     public ElixirController()
     {
-        Console.WriteLine("Press R to Start the Timer " + Environment.NewLine);
         _elixir = 0;
         _run = true;
         RunningThread();
@@ -25,14 +22,16 @@ public class ElixirController
             }
 
             Thread.Sleep(1000);
-            Console.WriteLine("Time! " + _elixir);
+            Console.WriteLine("Elixir " + _elixir);
         }
     }
 
-    static void RunningThread()
+    private static void RunningThread()
     {
-        Thread thread = new Thread(Run);
-        thread.IsBackground = false;
+        var thread = new Thread(Run)
+        {
+            IsBackground = false
+        };
         thread.Start();
     }
 
@@ -41,7 +40,7 @@ public class ElixirController
         return _elixir;
     }
 
-    public void SetEixir()
+    public void SetElixir()
     {
         _elixir = 0;
     }
@@ -49,5 +48,16 @@ public class ElixirController
     public void SetRunFalse()
     {
         _run = false;
+    }
+
+    public bool DecrementElixir(int n)
+    {
+        if (_elixir >= n)
+        {
+            _elixir -= n;
+            return true;
+        }
+
+        return false;
     }
 }

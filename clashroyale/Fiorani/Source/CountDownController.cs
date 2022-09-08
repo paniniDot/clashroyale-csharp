@@ -2,19 +2,17 @@
 
 public class CountDownController
 {
-    private static Timer? _timer;
     private static int _time;
     private const int DefaultTime = 90;
     private static bool _run;
-    private static readonly ConsoleColor DefaultC = Console.ForegroundColor;
 
     public CountDownController()
     {
-        Console.WriteLine("Press R to Start the Timer " + Environment.NewLine);
         _time = 90;
         _run = true;
         RunningThread();
     }
+
     private static void Run()
     {
         while (_run)
@@ -25,14 +23,16 @@ public class CountDownController
             }
 
             Thread.Sleep(1000);
-            Console.WriteLine("Time! " + _time);
+            Console.WriteLine("Time " + _time);
         }
     }
 
-    static void RunningThread()
+    private static void RunningThread()
     {
-        Thread thread = new Thread(Run);
-        thread.IsBackground = false;
+        var thread = new Thread(Run)
+        {
+            IsBackground = false
+        };
         thread.Start();
     }
 
