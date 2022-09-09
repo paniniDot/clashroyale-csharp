@@ -6,32 +6,45 @@ namespace Panni.Source.Model;
 public interface IAttackable
 {
     /// <summary>
+    /// The current position of the IAttackable.
     /// </summary>
-    /// <returns>The current position of this IAttackable.</returns>
-    Vector2 GetPosition();
-
+    Vector2 Position { get; set; }
+    
     /// <summary>
-    /// Set a new position for this IAttackable.
+    /// The range of action of the IAttackable.
     /// </summary>
-    /// <param name="newPos">The new Position.</param>
-    void SetPosition(Vector2 newPos);
-
+    double Range { get; }
+    
     /// <summary>
+    /// The damage per hit given from this IAttackable.
     /// </summary>
-    /// <returns>The range of action of the entity.</returns>
-    double GetRange();
-
+    double Damage { get; }
+    
     /// <summary>
-    /// By default all classes are Nullable in C#, No need to implement an Optional class for it.
+    /// Health points left to the IAttackable.
     /// </summary>
-    /// <returns>the current target, if any, of the entity that implements this interface.</returns>
-    IAttackable GetCurrentTarget();
+    double CurrentHp { get; }
+    
+    /// <summary>
+    /// The User who owns this IAttackable.
+    /// </summary>
+    User Owner { get; }
+    
+    /// <summary>
+    /// The current enemy IAttackable targeted by this one (if present).
+    /// </summary>
+    Optional<IAttackable> CurrentTarget { get; }
 
     /// <summary>
     /// Update the current target of this IAttackable.
     /// </summary>
     /// <param name="target">The new target.</param>
     void SetCurrentTarget(IAttackable target);
+
+    /// <summary>
+    /// Hit one time the current target, if any.
+    /// </summary>
+    void AttackCurrentTarget();
 
     /// <summary>
     /// Reset the current target.
@@ -45,22 +58,8 @@ public interface IAttackable
     void ReduceHpBy(double damage);
 
     /// <summary>
-    /// Hit one time the current target, if any.
-    /// </summary>
-    void AttackCurrentTarget();
-    
-    /// <summary>
     /// </summary>
     /// <returns>Whether the entity is dead or not.</returns>
     bool IsDead();
     
-    /// <summary>
-    /// </summary>
-    /// <returns>The remaining Health Point of this IAttackable.</returns>
-    double GetCurrentHp();
-
-    /// <summary>
-    /// </summary>
-    /// <returns>The owner of this IAttackable.</returns>
-    User GetOwner();
 }
