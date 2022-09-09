@@ -49,4 +49,27 @@ public abstract class Card : IAttackable
     {
         return this.CurrentHp <= 0;
     }
+
+    private bool Equals(Card other)
+    {
+        return Cost == other.Cost 
+               && Position.Equals(other.Position) 
+               && Range.Equals(other.Range) 
+               && CurrentHp.Equals(other.CurrentHp) 
+               && Owner.Equals(other.Owner) 
+               && Damage.Equals(other.Damage) 
+               && CurrentTarget.Equals(other.CurrentTarget);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return (obj.GetType() == this.GetType()) && Equals((Card) obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Cost, Position, Range, CurrentHp, Owner, Damage, CurrentTarget);
+    }
 }
