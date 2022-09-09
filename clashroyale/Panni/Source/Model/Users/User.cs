@@ -1,5 +1,8 @@
 ﻿namespace Panni.Source.Model.Users;
 
+/// <summary>
+/// Users that play the game.
+/// </summary>
 public class User
 {
     private static readonly IDictionary<UserLevel, int> XpsPerLevel = new Dictionary<UserLevel, int>()
@@ -12,13 +15,40 @@ public class User
     };
     private const int PointsPerDestroyedTower = 5;
     
+    /// <summary>
+    /// The nickname of the user.
+    /// </summary>
     public string Name { get; }
+    
+    /// <summary>
+    /// Current Xps owned by the user.
+    /// </summary>
     public int CurrentXp { get; private set; }
+    
+    /// <summary>
+    /// Current level of the user.
+    /// </summary>
     public UserLevel CurrentLevel { get; private set; }
+    
+    /// <summary>
+    /// The number of matches played by this user.
+    /// </summary>
     public int Plays { get; private set; }
+    
+    /// <summary>
+    /// The number of win achieved by this user.
+    /// </summary>
     public int Wins { get; private set; }
+    
+    /// <summary>
+    /// The number of towers destroyed by this user.
+    /// </summary>
     public int DestroyedTowers { get; private set; }
     
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="name">The nickname of the user.</param>
     public User(string name)
     {
         this.Name = name;
@@ -29,6 +59,9 @@ public class User
         this.CurrentLevel = UserLevel.Lvl1;
     }
 
+    /// <summary>
+    /// Xps decrease in case of lose.
+    /// </summary>
     public void DecreaseXps()
     {
         this.CurrentXp -= PointsPerDestroyedTower;
@@ -36,6 +69,10 @@ public class User
             this.CurrentXp = 0;
     }
     
+    /// <summary>
+    /// Increase the current xp user owns.
+    /// </summary>
+    /// <param name="destroyedTowers">How many towers the user has destroyed during the last match</param>
     public void AwardXps(int destroyedTowers)
     {
         this.CurrentXp += destroyedTowers * PointsPerDestroyedTower;
@@ -63,16 +100,26 @@ public class User
         this.CheckCurrentXps();
     }
 
+    /// <summary>
+    /// Increase the number of wins.
+    /// </summary>
     public void AddWin()
     {
         this.Wins++;
     }
 
+    /// <summary>
+    /// Increase the number of matches played.
+    /// </summary>
     public void AddPlay()
     {
         this.Plays++;
     }
 
+    /// <summary>
+    /// Increment the number of total destroyed towers.
+    /// </summary>
+    /// <param name="towers">The number of destroyed towers during the last match.</param>
     public void AddDestroyedTowers(int towers)
     {
         this.DestroyedTowers += towers;
