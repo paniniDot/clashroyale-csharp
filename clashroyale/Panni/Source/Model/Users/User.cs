@@ -90,7 +90,7 @@ public class User
     private UserLevel GetNextLevel()
     {
         var enumArray = Enum.GetValues<UserLevel>();
-        var index = Array.IndexOf<UserLevel>(enumArray, this.CurrentLevel) + 1;
+        var index = Array.IndexOf<>(enumArray, this.CurrentLevel) + 1;
         return enumArray.Length == index ? UserLevel.Lvl5 : enumArray[index];
     }
 
