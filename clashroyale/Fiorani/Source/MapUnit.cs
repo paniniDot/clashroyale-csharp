@@ -4,45 +4,42 @@ using System.Numerics;
 namespace Fiorani.Source;
 public class MapUnit
 {
-    int HEIGHT = 15;
-    int WIDTH = 19;
-    Vector2 coords;
-    Rectangle rect;
-    Type type;
+    private const int Height = 15;
+    private const int Width = 19;
+    private Vector2 _coords;
+    private Rectangle _rect;
+    private Type _type;
 
-    private enum Type {
-    
-        TERRAIN,
-    
-        TOWER,
-    
-        OBSTACLE;
+    public enum Type {
+        Terrain,
+        Tower,
+        Obstacle
     }
 
-    MapUnit(Vector2 coords, Vector2 pos,Type type)
+    public MapUnit(Vector2 coords, Vector2 pos, Type type)
     {
-        coords = coords;
-        rect = new Rectangle(pos.x, pos.y, WIDTH, HEIGHT);
-        type = type;
+        _coords = coords;
+        _rect = new Rectangle((int) pos.X, (int) pos.Y, Width, Height);
+        _type = type;
 
-        Vector2 getCoordinates() {
-            return coords;
+        Vector2 GetCoordinates() {
+            return _coords;
         }
     
-        Rectangle getUnitRectangle() {
-            return rect;
+        Rectangle GetUnitRectangle() {
+            return _rect;
         }
     
-        Vector2 getPosition() {
-            return new Vector2(rect.x, rect.y);
+        Vector2 GetPosition() {
+            return new Vector2(_rect.X, _rect.Y);
         }
     
-        Type getType() {
-            return type;
+        Type GetType() {
+            return _type;
         }
     
-        Vector2 getCenter() {
-            return new Vector2(rect.x + WIDTH, rect.y + HEIGHT);
+        Vector2 GetCenter() {
+            return new Vector2(_rect.X + Width, _rect.Y + Height);
         }
     }
 
