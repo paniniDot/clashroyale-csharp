@@ -11,7 +11,7 @@ public abstract class GameModel
     /**
    * the number of cards that can be chosen in every moment.
    */
-    protected static int CHOOSABLE_CARDS = 4;
+    protected const int ChoosableCards = 4;
 
     private List<Card> _playerCards;
     private List<Card> _playerCardQueue;
@@ -32,8 +32,12 @@ public abstract class GameModel
         _playerCardQueue = playerCards.ToList();
         _playerDeployedCards = new List<Card>();
         _playerChoosableCards = new List<Card>();
-        Enumerable.Range(0, CHOOSABLE_CARDS).ToList()
-            .ForEach(i => this._playerChoosableCards.Add(_playerCardQueue.RemoveAt(0)));
+        Enumerable.Range(0, ChoosableCards).ToList()
+            .ForEach(i =>
+            {
+                this._playerChoosableCards.Add(_playerCardQueue[i]);
+                _playerCardQueue.RemoveAt(i);
+            });
         this._playerActiveTowers = this.GetPlayerTowers(user);
     }
 
@@ -203,7 +207,7 @@ public abstract class GameModel
    */
     public List<IAttackable> GetPlayerAttackable()
     {
-        return (List<IAttackable>) this._playerDeployedCards.Union<IAttackable>((List<IAttackable>) _playerActiveTowers);
+        return (List<IAttackable>) this._playerDeployedCards.Union((List<IAttackable>) _playerActiveTowers);
     }
 
     /**
