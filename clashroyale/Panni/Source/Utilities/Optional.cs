@@ -23,4 +23,21 @@ public class Optional<T> {
     public T Get() {
         return _value;
     }
+
+    protected bool Equals(Optional<T> other)
+    {
+        return EqualityComparer<T>.Default.Equals(_value, other._value) && IsPresent == other.IsPresent;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return (obj.GetType() == this.GetType()) && Equals((Optional<T>) obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(_value, IsPresent);
+    }
 }
