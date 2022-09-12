@@ -1,22 +1,21 @@
-﻿namespace Bollini.Source.Controller.Deck;
-
-public class DeckController
+﻿namespace Bollini.Source.Controller.Deck
 {
-    /**
+  /**
  * Controller implementation for the game screen.
  */
-public class DeckController extends Controller {
+public class DeckController extends Controller
+{
+  private static final int _DECK_SIZE = 4;
 
-  private static final int DECK_SIZE = 4;
-
-  private final List<String> cards;
-  private final List<String> decklist;
-  private final JFrame frame;
+  private final List<String> _cards;
+  private final List<String> _decklist;
+  private final JFrame _frame;
 
   /**
    * Constructor.
    */
-  public DeckController() {
+  public DeckController() 
+  {
     super(new AudioDeckController());
     super.registerModel(new Model());
     final var skin = new Skin(Gdx.files.internal("buttons/menuSkin.json"), new TextureAtlas("buttons/atlas.pack"));
@@ -27,18 +26,21 @@ public class DeckController extends Controller {
 
 
   @Override
-  public void update(final float dt) {
+  public void Update(final float dt) 
+  {
   }
 
   /**
    * Istanciate a new MenuController which takes control of the application.
    */
-  public void triggerMenu() {
+  public void TriggerMenu() 
+  {
     new MenuController().setCurrentActiveScreen();
   }
 
   @Override
-  public void setCurrentActiveScreen() {
+  public void SetCurrentActiveScreen() 
+  {
     ClashRoyale.setActiveScreen(new DeckScreen(this));
   }
 
@@ -47,7 +49,8 @@ public class DeckController extends Controller {
    * 
    * @return the List of cards.
    */
-  public List<String> listGDXCard() {
+  public List<String> ListGDXCard() 
+  {
     this.cards.setItems(PlayersDeck.getInstance().namesCardsCard().stream().toArray(String[]::new));
     return cards;
   }
@@ -57,7 +60,8 @@ public class DeckController extends Controller {
    * 
    * @return the List of deck.
    */
-  public List<String> listGDXDeck() {
+  public List<String> ListGDXDeck() 
+  {
     this.decklist.setItems(PlayersDeck.getInstance().namesCardsDeck().stream().toArray(String[]::new));
     return decklist;
   }
@@ -69,7 +73,8 @@ public class DeckController extends Controller {
    * 
    * @return List of deck. 
    */
-  public List<String> addDeck(final String select) {
+  public List<String> AddDeck(final String select) 
+  {
     PlayersDeck.getInstance().addDeck(select);
     PlayersDeck.getInstance().getDeck().get(select).setPosition(PlayersDeck.getInstance().newPositionFree());
     return listGDXDeck();
@@ -82,7 +87,8 @@ public class DeckController extends Controller {
    * 
    * @return the list of cards updated.
    */
-  public List<String> addCard(final String select) {
+  public List<String> AddCard(final String select) 
+  {
     PlayersDeck.getInstance().addCard(select);
     return listGDXCard();
   }
@@ -94,7 +100,8 @@ public class DeckController extends Controller {
    * 
    * @return the list of cards updated. 
    */
-  public List<String> removeCard(final String card) {
+  public List<String> RemoveCard(final String card) 
+  {
     PlayersDeck.getInstance().removeCard(card);
     return listGDXCard();
   }
@@ -106,7 +113,8 @@ public class DeckController extends Controller {
    * 
    * @return the deckList updated.
    */
-  public List<String> removeDeckCard(final String card) {
+  public List<String> RemoveDeckCard(final String card) 
+  {
     PlayersDeck.getInstance().getPositionFree().add(PlayersDeck.getInstance().getDeck().get(card).getPosition());
     PlayersDeck.getInstance().removeDeckCard(card);
     return listGDXDeck();
@@ -117,8 +125,10 @@ public class DeckController extends Controller {
    * 
    * @return true if the deck has 4 cards.
    */
-  public boolean full() {
-    if (PlayersDeck.getInstance().getDeck().size() < DECK_SIZE) {
+  public boolean Full() 
+  {
+    if (PlayersDeck.getInstance().getDeck().size() < DECK_SIZE) 
+    {
       return true;
     }
     JOptionPane.showMessageDialog(frame, "DECK PIENO(MAX 4 CARTE), RIMUOVERE PRIMA UNA CARTA");
@@ -130,8 +140,10 @@ public class DeckController extends Controller {
    *
    *   @return true if the deck is empty.
    */
-  public bool empty() {
-    if (!PlayersDeck.getInstance().getDeck().isEmpty()) {
+  public bool Empty() 
+  {
+    if (!PlayersDeck.getInstance().getDeck().isEmpty()) 
+    {
       return true;
     }
     JOptionPane.showMessageDialog(frame, "DECK VUOTO");
@@ -141,7 +153,7 @@ public class DeckController extends Controller {
   /**
    * Check if the deck has 4 cards, than save the deck and return to the menu. 
    */
-  public void returnButton() {
+  public void ReturnButton() {
     if (PlayersDeck.getInstance().getDeck().size() == DECK_SIZE) {
 
       triggerMenu();
@@ -151,4 +163,5 @@ public class DeckController extends Controller {
   }
 }
 
+}
 }

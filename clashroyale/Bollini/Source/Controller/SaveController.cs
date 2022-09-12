@@ -1,30 +1,36 @@
-﻿namespace Bollini.Source.Controller;
-
+﻿namespace Bollini.Source.Controller
+{
 /**
  * Class used to save and load User and Deck.
  */
-public final class SaveController  {
+public final class SaveController  
+{
 
-    private static final Gson GSON = new GsonBuilder().create();
-    private static final String USER_DIR_PATH = System.getProperty("user.home") + File.separator + "royaleData" + File.separator;
-    private static final String FILE_NAME = "user.json";
+    private static final Gson _GSON = new GsonBuilder().create();
+    private static final String _USER_DIR_PATH = System.getProperty("user.home") + File.separator + "royaleData" + File.separator;
+    private static final String _FILE_NAME = "user.json";
 
-    private SaveController() {
+    private SaveController() 
+    {
     }
 
-    private static boolean checkDirectoryExistance() {
+    private static boolean CheckDirectoryExistance() 
+    {
         return new File(USER_DIR_PATH).exists();
     }
 
-    private static void createDirectory() {
+    private static void CreateDirectory() 
+    {
         new File(USER_DIR_PATH).mkdir();
     }
 
-    private static boolean checkFileExistance() {
+    private static boolean CheckFileExistance() 
+    {
         return new File(USER_DIR_PATH + File.separator + FILE_NAME).exists();
     }
 
-    private static void createFile() {
+    private static void CreateFile() 
+    {
         try {
             new File(USER_DIR_PATH + File.separator + FILE_NAME).createNewFile();
         } catch (IOException e) {
@@ -37,8 +43,9 @@ public final class SaveController  {
    * 
    * @return a {@link User} loaded from file.
    */
-    public static User loadUser() {
-        if (SaveController.checkDirectoryExistance() && SaveController.checkFileExistance()) {
+    public static User LoadUser() {
+        if (SaveController.checkDirectoryExistance() && SaveController.checkFileExistance()) 
+        {
             try {
                 return GSON.fromJson(new FileReader(new File(USER_DIR_PATH + File.separator + FILE_NAME)), User.class);
             } catch (IOException e) {
@@ -57,7 +64,8 @@ public final class SaveController  {
    * 
    * @param user the {@link User} to be saved.
    */
-    public static void saveUser(final User user) {
+    public static void SaveUser(final User user) 
+    {
         try (FileWriter writer = new FileWriter(new File(USER_DIR_PATH + File.separator + FILE_NAME))) {
             GSON.toJson(user, writer);
         } catch (IOException e) {
@@ -65,4 +73,5 @@ public final class SaveController  {
         }
     }
 
+}
 }

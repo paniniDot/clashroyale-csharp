@@ -1,9 +1,11 @@
-﻿namespace Bollini.Source.Model;
+﻿namespace Bollini.Source.Model
+{
 
 /**
  * Class used to easily provide and instance of User and Bot.
  */
-public final class GlobalData {
+public final class GlobalData 
+{
     /**
    * Provides a user instance.
    */
@@ -23,6 +25,8 @@ public final class GlobalData {
     Giant.create(BOT, new Vector2(300, 1000)), 
     Wizard.create(BOT, new Vector2(400, 1000)));
 
-    private GlobalData() {
+    private GlobalData() 
+    {
     }
+}
 }

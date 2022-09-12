@@ -1,10 +1,10 @@
-﻿namespace Bollini.Source.Model.Deck;
-
+﻿namespace Bollini.Source.Model.Deck
+{
 public final class PlayersDeck extends BasicDeck {
 
-  private static final PlayersDeck DECK = new PlayersDeck();
-  private final Map<String, Card> deckMap;
-  private final Map<String, Card> cardsMap;
+  private static final PlayersDeck _DECK = new PlayersDeck();
+  private final Map<String, Card> _deckMap;
+  private final Map<String, Card> _cardsMap;
 
   /**
    * initialize basic cards and decks.
@@ -112,4 +112,5 @@ public final class PlayersDeck extends BasicDeck {
   public static PlayersDeck getInstance() {
     return DECK;
   }
+}
 }
