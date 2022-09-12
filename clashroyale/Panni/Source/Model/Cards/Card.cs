@@ -1,5 +1,6 @@
 ﻿using Panni.Source.Model.Users;
 using Panni.Source.Utilities;
+using System.Numerics;
 
 namespace Panni.Source.Model.Cards;
 
