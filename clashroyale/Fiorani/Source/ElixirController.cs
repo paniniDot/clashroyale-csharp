@@ -1,10 +1,14 @@
 ﻿namespace Fiorani.Source;
-
+/// <summary>
+/// Utility class for elixir in game.
+/// </summary>
 public class ElixirController
 {
     private static int _elixir;
     private static bool _run;
-
+    /// <summary>
+    /// build an elixir controller.
+    /// </summary>
     public ElixirController()
     {
         _elixir = 0;
@@ -33,22 +37,30 @@ public class ElixirController
         };
         thread.Start();
     }
-
+    /// <returns>the current elixir owned.</returns>
     public int GetElixir()
     {
         return _elixir;
     }
-
-    public void SetElixir()
+    /// <summary>
+    /// set elixir value to 0.
+    /// </summary>
+    public void ResetElixir()
     {
         _elixir = 0;
     }
-
+    /// <summary>
+    /// set run to false.
+    /// </summary>
     public void SetRunFalse()
     {
         _run = false;
     }
-
+    /// <summary>
+    /// decrement elixir if enough.
+    /// </summary>
+    /// <param name="n">the amount of elixir to be taken.</param>
+    /// /// <returns>true if decremented.</returns>
     public bool DecrementElixir(int n)
     {
         if (_elixir >= n)
