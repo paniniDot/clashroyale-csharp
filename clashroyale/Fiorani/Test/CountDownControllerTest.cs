@@ -5,7 +5,7 @@ namespace Fiorani.Test;
 
 public class CountDownControllerTest
 {
-    private CountDownController? _controller;
+    private CountDownController _controller;
 
     [SetUp]
     public void InitializeCountDownController()

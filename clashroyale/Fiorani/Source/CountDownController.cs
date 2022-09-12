@@ -17,12 +17,11 @@ public class CountDownController
     {
         while (_run)
         {
+            Thread.Sleep(1000);
             if (_time > 0)
             {
                 _time--;
             }
-
-            Thread.Sleep(1000);
             Console.WriteLine("Time " + _time);
         }
     }
