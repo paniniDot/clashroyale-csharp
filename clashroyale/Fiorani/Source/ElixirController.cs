@@ -16,12 +16,11 @@ public class ElixirController
     {
         while (_run)
         {
+            Thread.Sleep(1000);
             if (_elixir < 10)
             {
                 _elixir++;
             }
-
-            Thread.Sleep(1000);
             Console.WriteLine("Elixir " + _elixir);
         }
     }
