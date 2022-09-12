@@ -130,7 +130,7 @@ public class DeckController extends Controller {
    *
    *   @return true if the deck is empty.
    */
-  public boolean empty() {
+  public bool empty() {
     if (!PlayersDeck.getInstance().getDeck().isEmpty()) {
       return true;
     }
