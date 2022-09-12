@@ -13,11 +13,17 @@ public class CardTest
     private Card _wiz;
     private User _user;
 
+    private Card _botWiz;
+    private Bot _bot;
+
     [SetUp]
     public void InitializeCard()
     {
         this._user = new User("Panini");
         this._wiz = Wizard.Create(this._user, new Vector2(0, 0));
+
+        this._bot = new Bot();
+        this._botWiz = Wizard.Create(this._bot, new Vector2(10, 10));
     }
     
     /// <summary>
@@ -40,16 +46,25 @@ public class CardTest
     }
 
     /// <summary>
-    /// 
+    /// Kill the wizard and then verify if is dead.
     /// </summary>
     [Test]
     public void ReduceLifeUntilIsDeadTest()
     {
         while (this._wiz.CurrentHp > 0)
         {
-            this._wiz.ReduceHpBy(100);
+            this._wiz.ReduceHpBy(300);
         }
         Assert.IsTrue(this._wiz.IsDead());
+    }
+
+    [Test]
+    public void TargetTest()
+    {
+        Assert.IsFalse(this._wiz.CurrentTarget.IsPresent);
+        this._wiz.SetCurrentTarget(this._botWiz);
+        Assert.IsTrue(this._wiz.CurrentTarget.IsPresent);
+        Assert.That(this._wiz.Range, Is.GreaterThan(Vector2.Distance(this._wiz.Position, this._botWiz.Position)));
     }
     
 }
