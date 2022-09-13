@@ -9,7 +9,7 @@ public interface IAttackable
     /// <summary>
     /// The current position of the IAttackable.
     /// </summary>
-    Vector2 Position { get; set; }
+    Vector2 Position { get; }
     
     /// <summary>
     /// The range of action of the IAttackable.

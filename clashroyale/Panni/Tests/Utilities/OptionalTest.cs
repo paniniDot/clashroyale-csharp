@@ -3,6 +3,10 @@ using Panni.Source.Utilities;
 
 namespace Panni.Tests.Utilities;
 
+/// <summary>
+/// Test case for Optional class.
+/// </summary>
+[TestFixture]
 public class OptionalTest
 {
     private Optional<int> _optional;
