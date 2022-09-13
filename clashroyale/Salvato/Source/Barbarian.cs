@@ -25,12 +25,12 @@ namespace Salvato.Source
 
         public static Troop Create(User user, Vector2 position) => user.CurrentLevel switch
         {
-            UserLevel.Lvl1 => new Barbarian(user, position, 12000, 100),
-            UserLevel.Lvl2 => new Barbarian(user, position, 13000, 120),
-            UserLevel.Lvl3 => new Barbarian(user, position, 14000, 140),
-            UserLevel.Lvl4 => new Barbarian(user, position, 15000, 160),
-            UserLevel.Lvl5 => new Barbarian(user, position, 16000, 180),
-            _ => new Barbarian(user, position, 12000, 100)
+            UserLevel.Lvl1 => new Barbarian(user, position, 400*60, 200),
+            UserLevel.Lvl2 => new Barbarian(user, position, 450*60, 220),
+            UserLevel.Lvl3 => new Barbarian(user, position, 500*60, 240),
+            UserLevel.Lvl4 => new Barbarian(user, position, 550*60, 260),
+            UserLevel.Lvl5 => new Barbarian(user, position, 600*60, 280),
+            _ => new Barbarian(user, position, 24000, 200)
         };
 
         public Map<String, List<String>> GetAnimationFiles() => Map.of(
