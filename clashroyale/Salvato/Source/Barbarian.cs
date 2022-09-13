@@ -1,4 +1,5 @@
-﻿//using Panni.Source.Utilities.Vector2;
+﻿using Panni.Source.Model.Cards.Troops;
+using Panni.Source.Model.User.User;
 using System;
 using System.IO;
 using System.Numerics;
@@ -18,7 +19,7 @@ namespace Salvato.Source
         private const int Range = 60;
 
         private Barbarian(User owner, Vector2 position, double maxHP, double damage)
-            : base(Barbarian.ElixirCost, position, owner, maxHP, damage, Speeds.MEDIUM, Barbarian.Range)
+            : base(Barbarian.ElixirCost, position, owner, maxHP, damage, Barbarian.Range)
         {
 
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Panni.Source.Model.Cards.Troops;
+using Panni.Source.Model.User.User;
 
 namespace Salvato.Source
 {
@@ -19,7 +21,7 @@ namespace Salvato.Source
         private const int Range = 30;
 
         private Giant(User owner, Vector2 position, double maxHP, double damage)
-            : base(Giant.ElixirCost, position, owner, maxHP, damage, Speeds.MEDIUM, Giant.Range)
+            : base(Giant.ElixirCost, position, owner, maxHP, damage, Giant.Range)
         {
 
         }
