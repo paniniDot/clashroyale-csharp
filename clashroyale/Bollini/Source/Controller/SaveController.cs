@@ -3,12 +3,12 @@
 /**
  * Class used to save and load User and Deck.
  */
-public final class SaveController  
+public readonly class SaveController  
 {
 
-    private static final Gson _GSON = new GsonBuilder().create();
-    private static final String _USER_DIR_PATH = System.getProperty("user.home") + File.separator + "royaleData" + File.separator;
-    private static final String _FILE_NAME = "user.json";
+    private static readonly Gson _GSON = new GsonBuilder().create();
+    private static readonly String _USER_DIR_PATH = System.getProperty("user.home") + File.separator + "royaleData" + File.separator;
+    private static readonly String _FILE_NAME = "user.json";
 
     private SaveController() 
     {
@@ -64,7 +64,7 @@ public final class SaveController
    * 
    * @param user the {@link User} to be saved.
    */
-    public static void SaveUser(final User user) 
+    public static void SaveUser(readonly User user) 
     {
         try (FileWriter writer = new FileWriter(new File(USER_DIR_PATH + File.separator + FILE_NAME))) {
             GSON.toJson(user, writer);
