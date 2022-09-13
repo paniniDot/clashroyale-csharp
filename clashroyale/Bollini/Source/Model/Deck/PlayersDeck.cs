@@ -12,12 +12,12 @@ public sealed class PlayersDeck : BasicDeck {
    * initialize basic cards and decks.
    */
   private PlayersDeck() {
-    deckMap = new HashMap<>();
+    deckMap = new HashMap<String, Card>();
     deckMap.put("Barbarian", Barbarian.create(GlobalData.USER, newPositionFree()));
     deckMap.put("Giant", Giant.create(GlobalData.USER, newPositionFree()));
     deckMap.put("InfernoTower", InfernoTower.create(GlobalData.USER, newPositionFree()));
     deckMap.put("Wizard", Wizard.create(GlobalData.USER, newPositionFree())); 
-    cardsMap = new HashMap<>();
+    cardsMap = new HashMap<String, Card>();
     cardsMap.put("Archer", Archer.create(GlobalData.USER, new Vector2(0, 0)));
     cardsMap.put("MiniPekka", MiniPekka.create(GlobalData.USER, new Vector2(0, 0)));
     cardsMap.put("Valkrie", Valkyrie.create(GlobalData.USER, new Vector2(0, 0)));
@@ -66,11 +66,14 @@ public sealed class PlayersDeck : BasicDeck {
    * 
    * @return List<Card> from map
    */
-  public List<Card> CardList() => DeckMap.entrySet().stream()
-        .map(e -> e.getValue())
-        .collect(Collectors.toList());
+  public List<Card> CardList()
+  {
+      return DeckMap.entrySet().stream()
+          .map(e->e.getValue())
+          .collect(Collectors.toList());
+  }
 
-/**
+  /**
    * 
    * @return List<String> from key deckmap
    */

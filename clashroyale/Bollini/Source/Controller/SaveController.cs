@@ -1,4 +1,6 @@
-﻿namespace Bollini.Source.Controller
+﻿using Panni.Source.Model.Users;
+
+namespace Bollini.Source.Controller
 {
 /**
  * Class used to save and load User and Deck.

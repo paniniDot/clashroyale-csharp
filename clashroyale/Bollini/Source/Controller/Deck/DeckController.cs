@@ -18,8 +18,8 @@ public class DeckController : Controller
    */
   public DeckController() 
   {
-    super(new AudioDeckController());
-    super.registerModel(new Model());
+    base(new AudioDeckController());
+    base.registerModel(new Model());
     readonly var skin = new Skin(Gdx.files.internal("buttons/menuSkin.json"), new TextureAtlas("buttons/atlas.pack"));
     decklist = new List<>(skin);
     cards = new List<>(skin);
@@ -35,9 +35,7 @@ public class DeckController : Controller
   {
     new MenuController().setCurrentActiveScreen();
   }
-
-  @Override
-  public void SetCurrentActiveScreen() 
+  public override void SetCurrentActiveScreen() 
   {
     ClashRoyale.setActiveScreen(new DeckScreen(this));
   }
