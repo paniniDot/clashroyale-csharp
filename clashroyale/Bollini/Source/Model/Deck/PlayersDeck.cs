@@ -5,8 +5,8 @@ namespace Bollini.Source.Model.Deck
 public final class PlayersDeck extends BasicDeck {
 
   private static readonly PlayersDeck _DECK = new PlayersDeck();
-  private readonly Map<String, Card> _deckMap;
-  private readonly Map<String, Card> _cardsMap;
+  public Map<String, Card> DeckMap { get; }
+  public Map<String, Card> CardsMap { get; }
 
   /**
    * initialize basic cards and decks.
@@ -24,26 +24,14 @@ public final class PlayersDeck extends BasicDeck {
 
   }
 
-  /**
-   * 
-   * @return getDeckMap
-   */
-  public Map<String, Card> GetDeck() => deckMap;
-
-/**
-   * 
-   * @return getCardsMap
-   */
-  public Map<String, Card> GetCards() => cardsMap;
-
 /**
    * 
    * @param select
    * @return deckMap
    */
   public Map<String, Card> AddDeck(readonly String select) {
-    deckMap.put(select, cardsMap.get(select));
-    return deckMap;
+    DeckMap.put(select, cardsMap.get(select));
+    return DeckMap;
   }
   /**
    * 
@@ -51,8 +39,8 @@ public final class PlayersDeck extends BasicDeck {
    * @return cardsMap
    */
   public Map<String, Card> AddCard(readonly String select) {
-    cardsMap.put(select, deckMap.get(select));
-    return cardsMap;
+    CardsMap.put(select, deckMap.get(select));
+    return CardsMap;
   }
   /**
    * 
@@ -60,8 +48,8 @@ public final class PlayersDeck extends BasicDeck {
    * @return cardsMap
    */
   public Map<String, Card> RemoveCard(readonly String select) {
-    cardsMap.remove(select);
-    return cardsMap;
+    CardsMap.remove(select);
+    return CardsMap;
   }
 
   /**
@@ -70,31 +58,36 @@ public final class PlayersDeck extends BasicDeck {
    * @return deckMap
    */
   public Map<String, Card> RemoveDeckCard(readonly String select) {
-    deckMap.remove(select);
-    return deckMap;
+    DeckMap.remove(select);
+    return DeckMap;
   }
 
   /**
    * 
    * @return List<Card> from map
    */
-  public List<Card> CardList() => deckMap.entrySet().stream()
+  public List<Card> CardList() => DeckMap.entrySet().stream()
         .map(e -> e.getValue())
         .collect(Collectors.toList());
-  
-  /**
+
+/**
    * 
    * @return List<String> from key deckmap
    */
-  public List<String> namesCardsDeck() => deckMap.entrySet().stream()
-        .map(e -> e.getKey())
+public List<String> namesCardsDeck()
+{
+    return DeckMap.entrySet().stream()
+        .map(e->e.getKey())
         .collect(Collectors.toList());
-/**
+}
+
+/*  
+ *
    * 
    * @return List<String> from key cardsmap
    */
   public List<String> namesCardsCard() {
-    return cardsMap.entrySet().stream()
+    return CardsMap.entrySet().stream()
         .map(e -> e.getKey())
         .collect(Collectors.toList());
   }

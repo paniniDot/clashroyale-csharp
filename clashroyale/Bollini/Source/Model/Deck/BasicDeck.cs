@@ -11,22 +11,16 @@ public class BasicDeck
     private static readonly int _POSCARD3 = 400;
     private static readonly int _POSCARD4 = 500;
 
-    private readonly Set<Vector2> _positionFree;
+    public Set<Vector2> PositionFree { get; }
 
     /**
    * Constructor for position free, protected in order to cannot instantiate it from outside its package. 
    */
     protected BasicDeck() 
     {
-        positionFree = new HashSet<>(Arrays.asList(new Vector2(POSCARD1, HEIGHTCARD), new Vector2(POSCARD2, HEIGHTCARD), new Vector2(POSCARD3, HEIGHTCARD), new Vector2(POSCARD4, HEIGHTCARD)));
+        PositionFree = new HashSet<>(Arrays.asList(new Vector2(POSCARD1, HEIGHTCARD), new Vector2(POSCARD2, HEIGHTCARD), new Vector2(POSCARD3, HEIGHTCARD), new Vector2(POSCARD4, HEIGHTCARD)));
     }
-
-    /**
-   * 
-   * @return positionFree
-   */
-    public Set<Vector2> GetPositionFree() => positionFree;
-
+    
     /**
    * 
    * @return the first free position and deletes it from those available
