@@ -27,21 +27,23 @@ namespace Salvato.Source
         }
 
         public static Troop Create(User user, Vector2 position) => user.CurrentLevel switch
-        {
-            UserLevel.Lvl1 => new MiniPekka(user, position, 300 * 60, 150),
-            UserLevel.Lvl2 => new MiniPekka(user, position, 350 * 60, 170),
-            UserLevel.Lvl3 => new MiniPekka(user, position, 400 * 60, 300),
-            UserLevel.Lvl4 => new MiniPekka(user, position, 450 * 60, 325),
-            UserLevel.Lvl5 => new MiniPekka(user, position, 500 * 60, 360),
-            _ => new MiniPekka(user, position, 300 * 60, 150)
-        };
+            {
+                UserLevel.Lvl1 => new MiniPekka(user, position, 300 * 60, 150),
+                UserLevel.Lvl2 => new MiniPekka(user, position, 350 * 60, 170),
+                UserLevel.Lvl3 => new MiniPekka(user, position, 400 * 60, 300),
+                UserLevel.Lvl4 => new MiniPekka(user, position, 450 * 60, 325),
+                UserLevel.Lvl5 => new MiniPekka(user, position, 500 * 60, 360),
+                _ => new MiniPekka(user, position, 300 * 60, 150)
+            };
 
-        public Map<String, List<String>> GetAnimationFiles() => Map.of(
-            "SELF_MOVING", List.of(MiniPekka.SelfWalk + "0.png", MiniPekka.SelfWalk + "1.png", MiniPekka.SelfWalk + "2.png", MiniPekka.SelfWalk + "3.png",
-            MiniPekka.SelfWalk + "4.png", MiniPekka.SelfWalk + "5.png", MiniPekka.SelfWalk + "6.png"),
-            "SELF_FIGHTING", List.of(MiniPekka.SelfAtt + "0.png", MiniPekka.SelfAtt + "1.png", MiniPekka.SelfAtt + "2.png", MiniPekka.SelfAtt + "3.png"),
-            "ENEMY_MOVING", List.of(MiniPekka.BotWalk + "0.png", MiniPekka.BotWalk + "1.png"),
-            "ENEMY_FIGHTING", List.of(MiniPekka.BotAtt + "0.png", MiniPekka.BotAtt + "1.png", MiniPekka.BotAtt + "2.png", MiniPekka.BotAtt + "3.png"),
-            "AS_CARD", List.of("cards" + Path.DirectorySeparatorChar + "MiniPekkasCard.png"));
+        public Dictionary<string, List<string>> GetAnimationFiles() => new Dictionary<string, List<string>>()
+            {
+                ["SELF_MOVING"] = new List<string> { MiniPekka.SelfWalk + "0.png", MiniPekka.SelfWalk + "1.png", MiniPekka.SelfWalk + "2.png", MiniPekka.SelfWalk + "3.png" },
+                ["SELF_FIGHTING"] = new List<string> { MiniPekka.SelfAtt + "0.png", MiniPekka.SelfAtt + "1.png", MiniPekka.SelfAtt + "2.png" },
+                ["ENEMY_MOVING"] = new List<string> { MiniPekka.BotWalk + "0.png", MiniPekka.BotWalk + "1.png", MiniPekka.BotWalk + "2.png", MiniPekka.BotWalk + "3.png" },
+                ["ENEMY_FIGHTING"] = new List<string> { MiniPekka.BotAtt + "0.png", MiniPekka.BotAtt + "1.png", MiniPekka.BotAtt + "2.png" },
+                ["AS_CARD"] = new List<string> { "cards" + Path.DirectorySeparatorChar + "MiniPekkasCard.png" }
+            };
+
     }
 }
