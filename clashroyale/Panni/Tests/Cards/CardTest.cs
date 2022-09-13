@@ -8,6 +8,7 @@ using Panni.Source.Model;
 
 namespace Panni.Tests.Cards;
 
+[TestFixture]
 public class CardTest
 { 
     private Card _wiz;
@@ -58,13 +59,27 @@ public class CardTest
         Assert.IsTrue(this._wiz.IsDead());
     }
 
+    /// <summary>
+    /// Test if the current target updates correctly.
+    /// </summary>
     [Test]
     public void TargetTest()
     {
         Assert.IsFalse(this._wiz.CurrentTarget.IsPresent);
         this._wiz.SetCurrentTarget(this._botWiz);
         Assert.IsTrue(this._wiz.CurrentTarget.IsPresent);
+    }
+
+    /// <summary>
+    /// Test if the range works correctly.
+    /// </summary>
+    [Test]
+    public void RangeTest()
+    {
         Assert.That(this._wiz.Range, Is.GreaterThan(Vector2.Distance(this._wiz.Position, this._botWiz.Position)));
+        this._botWiz.Position = new Vector2((float) (this._wiz.Range + 1), (float) (this._wiz.Range + 1));
+        Assert.That(this._wiz.Range, Is.LessThan(Vector2.Distance(this._wiz.Position, this._botWiz.Position)));
+
     }
     
 }

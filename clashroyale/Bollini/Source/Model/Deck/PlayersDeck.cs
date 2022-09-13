@@ -1,24 +1,26 @@
-﻿namespace Bollini.Source.Model.Deck
+﻿using System.Numerics;
+
+namespace Bollini.Source.Model.Deck
 {
 public final class PlayersDeck extends BasicDeck {
 
-  private static final PlayersDeck _DECK = new PlayersDeck();
-  private final Map<String, Card> _deckMap;
-  private final Map<String, Card> _cardsMap;
+  private static readonly PlayersDeck _DECK = new PlayersDeck();
+  private readonly Map<String, Card> _deckMap;
+  private readonly Map<String, Card> _cardsMap;
 
   /**
    * initialize basic cards and decks.
    */
   private PlayersDeck() {
-    this.deckMap = new HashMap<>();
-    this.deckMap.put("Barbarian", Barbarian.create(GlobalData.USER, newPositionFree()));
-    this.deckMap.put("Giant", Giant.create(GlobalData.USER, newPositionFree()));
-    this.deckMap.put("InfernoTower", InfernoTower.create(GlobalData.USER, newPositionFree()));
-    this.deckMap.put("Wizard", Wizard.create(GlobalData.USER, newPositionFree())); 
-    this.cardsMap = new HashMap<>();
-    this.cardsMap.put("Archer", Archer.create(GlobalData.USER, new Vector2(0, 0)));
-    this.cardsMap.put("MiniPekka", MiniPekka.create(GlobalData.USER, new Vector2(0, 0)));
-    this.cardsMap.put("Valkrie", Valkyrie.create(GlobalData.USER, new Vector2(0, 0)));
+    deckMap = new HashMap<>();
+    deckMap.put("Barbarian", Barbarian.create(GlobalData.USER, newPositionFree()));
+    deckMap.put("Giant", Giant.create(GlobalData.USER, newPositionFree()));
+    deckMap.put("InfernoTower", InfernoTower.create(GlobalData.USER, newPositionFree()));
+    deckMap.put("Wizard", Wizard.create(GlobalData.USER, newPositionFree())); 
+    cardsMap = new HashMap<>();
+    cardsMap.put("Archer", Archer.create(GlobalData.USER, new Vector2(0, 0)));
+    cardsMap.put("MiniPekka", MiniPekka.create(GlobalData.USER, new Vector2(0, 0)));
+    cardsMap.put("Valkrie", Valkyrie.create(GlobalData.USER, new Vector2(0, 0)));
 
   }
 
@@ -26,24 +28,20 @@ public final class PlayersDeck extends BasicDeck {
    * 
    * @return getDeckMap
    */
-  public Map<String, Card> getDeck() {
-    return deckMap;
-  }
+  public Map<String, Card> GetDeck() => deckMap;
 
-  /**
+/**
    * 
    * @return getCardsMap
    */
-  public Map<String, Card> getCards() {
-    return cardsMap;
-  }
+  public Map<String, Card> GetCards() => cardsMap;
 
-  /**
+/**
    * 
    * @param select
    * @return deckMap
    */
-  public Map<String, Card> addDeck(final String select) {
+  public Map<String, Card> AddDeck(readonly String select) {
     deckMap.put(select, cardsMap.get(select));
     return deckMap;
   }
@@ -52,7 +50,7 @@ public final class PlayersDeck extends BasicDeck {
    * @param select
    * @return cardsMap
    */
-  public Map<String, Card> addCard(final String select) {
+  public Map<String, Card> AddCard(readonly String select) {
     cardsMap.put(select, deckMap.get(select));
     return cardsMap;
   }
@@ -61,7 +59,7 @@ public final class PlayersDeck extends BasicDeck {
    * @param select
    * @return cardsMap
    */
-  public Map<String, Card> removeCard(final String select) {
+  public Map<String, Card> RemoveCard(readonly String select) {
     cardsMap.remove(select);
     return cardsMap;
   }
@@ -71,7 +69,7 @@ public final class PlayersDeck extends BasicDeck {
    * @param select
    * @return deckMap
    */
-  public Map<String, Card> removeDeckCard(final String select) {
+  public Map<String, Card> RemoveDeckCard(readonly String select) {
     deckMap.remove(select);
     return deckMap;
   }
@@ -80,21 +78,18 @@ public final class PlayersDeck extends BasicDeck {
    * 
    * @return List<Card> from map
    */
-  public List<Card> cardList() {
-    return deckMap.entrySet().stream()
+  public List<Card> CardList() => deckMap.entrySet().stream()
         .map(e -> e.getValue())
         .collect(Collectors.toList());
-  }
+  
   /**
    * 
    * @return List<String> from key deckmap
    */
-  public List<String> namesCardsDeck() {
-    return deckMap.entrySet().stream()
+  public List<String> namesCardsDeck() => deckMap.entrySet().stream()
         .map(e -> e.getKey())
         .collect(Collectors.toList());
-  }
-  /**
+/**
    * 
    * @return List<String> from key cardsmap
    */
@@ -109,8 +104,6 @@ public final class PlayersDeck extends BasicDeck {
    * 
    * @return the only DECK
    */
-  public static PlayersDeck getInstance() {
-    return DECK;
-  }
+  public static PlayersDeck getInstance() => DECK;
 }
 }

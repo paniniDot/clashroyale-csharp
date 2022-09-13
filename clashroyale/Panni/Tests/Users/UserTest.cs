@@ -6,6 +6,7 @@ namespace Panni.Tests.Users;
 /// <summary>
 /// Test case for User class.
 /// </summary>
+[TestFixture]
 public class UserTest
 {
     private const string UserName = "Panini";
