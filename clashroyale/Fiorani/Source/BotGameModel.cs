@@ -24,8 +24,8 @@ public class BotGameModel : GameModel
         Enumerable.Range(0, ChoosableCards).ToList()
             .ForEach(i =>
             {
-                this._botChoosableCards.Add(_botCardQueue[i]);
-                _botCardQueue.RemoveAt(i);
+                this._botChoosableCards.Add(_botCardQueue[0]);
+                _botCardQueue.RemoveAt(0);
             });
         this._botActiveTowers = this.GetBotTowers(bot);
     }
@@ -107,7 +107,7 @@ public class BotGameModel : GameModel
 
     public List<IAttackable> GetBotAttackable()
     {
-        return (List<IAttackable>) this._botDeployedCards.Union<IAttackable>( _botActiveTowers);
+        return new List<IAttackable>(this._botDeployedCards.Union<IAttackable>(_botActiveTowers));
     }
 
     private void FindTargets(List<IAttackable> selfAttackables, List<IAttackable> enemyAttackables)

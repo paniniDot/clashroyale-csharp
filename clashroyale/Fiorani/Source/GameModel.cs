@@ -36,8 +36,8 @@ public abstract class GameModel
         Enumerable.Range(0, ChoosableCards).ToList()
             .ForEach(i =>
             {
-                this._playerChoosableCards.Add(_playerCardQueue[i]);
-                _playerCardQueue.RemoveAt(i);
+                this._playerChoosableCards.Add(_playerCardQueue[0]);
+                _playerCardQueue.RemoveAt(0);
             });
         this._playerActiveTowers = this.GetPlayerTowers(user);
     }
@@ -209,7 +209,7 @@ public abstract class GameModel
    */
     public List<IAttackable> GetPlayerAttackable()
     {
-        return (List<IAttackable>) this._playerDeployedCards.Union<IAttackable>(_playerActiveTowers);
+        return new List<IAttackable>(this._playerDeployedCards.Union<IAttackable>(_playerActiveTowers));
     }
 
     /**
