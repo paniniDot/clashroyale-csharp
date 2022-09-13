@@ -7,7 +7,7 @@ namespace Bollini.Source.Model
 /**
  * Class used to easily provide and instance of User and Bot.
  */
-public readonly class GlobalData 
+public sealed class GlobalData 
 {
     /**
    * Provides a user instance.

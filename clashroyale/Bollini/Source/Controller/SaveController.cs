@@ -3,7 +3,7 @@
 /**
  * Class used to save and load User and Deck.
  */
-public readonly class SaveController  
+public sealed class SaveController  
 {
 
     private static readonly Gson _GSON = new GsonBuilder().create();

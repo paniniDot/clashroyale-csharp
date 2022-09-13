@@ -3,9 +3,9 @@
 namespace Bollini.Source.Controller.Deck
 {
   /**
- * Controller implementation for the game screen.
+ ///Controller implementation for the game screen.
  */
-public class DeckController extends Controller
+public class DeckController : Controller
 {
   private static readonly int _DECK_SIZE = 4;
 
@@ -26,11 +26,7 @@ public class DeckController extends Controller
     frame = new JFrame();
   }
 
-
-  @Override
-  public void Update(readonly float dt) 
-  {
-  }
+  
 
   /**
    * Istanciate a new MenuController which takes control of the application.

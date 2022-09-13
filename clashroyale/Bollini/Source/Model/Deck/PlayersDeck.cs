@@ -2,7 +2,7 @@
 
 namespace Bollini.Source.Model.Deck
 {
-public final class PlayersDeck extends BasicDeck {
+public sealed class PlayersDeck : BasicDeck {
 
   private static readonly PlayersDeck _DECK = new PlayersDeck();
   public Map<String, Card> DeckMap { get; }
