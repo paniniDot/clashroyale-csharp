@@ -5,7 +5,7 @@ using Panni.Source.Model.Towers;
 using Panni.Source.Model.Users;
 using Panni.Source.Utilities;
 
-namespace Fiorani.Source;
+namespace Fiorani.Source.Model;
 
 public class BotGameModel : GameModel
 {

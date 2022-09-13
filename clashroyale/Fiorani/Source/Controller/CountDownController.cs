@@ -1,4 +1,4 @@
-﻿namespace Fiorani.Source;
+﻿namespace Fiorani.Source.Controller;
 
 /// <summary>
 /// Utility class for CountDown in game.

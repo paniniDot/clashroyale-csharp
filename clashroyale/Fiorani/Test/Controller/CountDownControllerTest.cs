@@ -1,7 +1,7 @@
-﻿using Fiorani.Source;
+﻿using Fiorani.Source.Controller;
 using NUnit.Framework;
 
-namespace Fiorani.Test;
+namespace Fiorani.Test.Controller;
 
 public class CountDownControllerTest
 {

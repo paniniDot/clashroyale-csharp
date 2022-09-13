@@ -5,7 +5,7 @@ using Panni.Source.Model.Users;
 using Panni.Source.Utilities;
 using Vector2 = System.Numerics.Vector2;
 
-namespace Fiorani.Source;
+namespace Fiorani.Source.Model;
 
 public abstract class GameModel
 {
