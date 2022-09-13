@@ -1,15 +1,17 @@
-﻿namespace Bollini.Source.Controller.Deck
+﻿using Bollini.Source.Model.Deck;
+
+namespace Bollini.Source.Controller.Deck
 {
   /**
  * Controller implementation for the game screen.
  */
 public class DeckController extends Controller
 {
-  private static final int _DECK_SIZE = 4;
+  private static readonly int _DECK_SIZE = 4;
 
-  private final List<String> _cards;
-  private final List<String> _decklist;
-  private final JFrame _frame;
+  private readonly List<String> _cards;
+  private readonly List<String> _decklist;
+  private readonly JFrame _frame;
 
   /**
    * Constructor.
@@ -18,15 +20,15 @@ public class DeckController extends Controller
   {
     super(new AudioDeckController());
     super.registerModel(new Model());
-    final var skin = new Skin(Gdx.files.internal("buttons/menuSkin.json"), new TextureAtlas("buttons/atlas.pack"));
-    this.decklist = new List<>(skin);
-    this.cards = new List<>(skin);
-    this.frame = new JFrame();
+    readonly var skin = new Skin(Gdx.files.internal("buttons/menuSkin.json"), new TextureAtlas("buttons/atlas.pack"));
+    decklist = new List<>(skin);
+    cards = new List<>(skin);
+    frame = new JFrame();
   }
 
 
   @Override
-  public void Update(final float dt) 
+  public void Update(readonly float dt) 
   {
   }
 
@@ -51,7 +53,7 @@ public class DeckController extends Controller
    */
   public List<String> ListGDXCard() 
   {
-    this.cards.setItems(PlayersDeck.getInstance().namesCardsCard().stream().toArray(String[]::new));
+    cards.setItems(PlayersDeck.getInstance().namesCardsCard().stream().toArray(String[]::new));
     return cards;
   }
 
@@ -62,7 +64,7 @@ public class DeckController extends Controller
    */
   public List<String> ListGDXDeck() 
   {
-    this.decklist.setItems(PlayersDeck.getInstance().namesCardsDeck().stream().toArray(String[]::new));
+    decklist.setItems(PlayersDeck.getInstance().namesCardsDeck().stream().toArray(String[]::new));
     return decklist;
   }
 
@@ -73,7 +75,7 @@ public class DeckController extends Controller
    * 
    * @return List of deck. 
    */
-  public List<String> AddDeck(final String select) 
+  public List<String> AddDeck(readonly String select) 
   {
     PlayersDeck.getInstance().addDeck(select);
     PlayersDeck.getInstance().getDeck().get(select).setPosition(PlayersDeck.getInstance().newPositionFree());
@@ -87,7 +89,7 @@ public class DeckController extends Controller
    * 
    * @return the list of cards updated.
    */
-  public List<String> AddCard(final String select) 
+  public List<String> AddCard(readonly String select) 
   {
     PlayersDeck.getInstance().addCard(select);
     return listGDXCard();
@@ -100,7 +102,7 @@ public class DeckController extends Controller
    * 
    * @return the list of cards updated. 
    */
-  public List<String> RemoveCard(final String card) 
+  public List<String> RemoveCard(readonly String card) 
   {
     PlayersDeck.getInstance().removeCard(card);
     return listGDXCard();
@@ -113,7 +115,7 @@ public class DeckController extends Controller
    * 
    * @return the deckList updated.
    */
-  public List<String> RemoveDeckCard(final String card) 
+  public List<String> RemoveDeckCard(readonly String card) 
   {
     PlayersDeck.getInstance().getPositionFree().add(PlayersDeck.getInstance().getDeck().get(card).getPosition());
     PlayersDeck.getInstance().removeDeckCard(card);
@@ -161,7 +163,4 @@ public class DeckController extends Controller
       JOptionPane.showMessageDialog(frame, "INSERIRE 4 CARTE NEL DECK PER POTER GIOCARE");
     }
   }
-}
-
-}
 }
