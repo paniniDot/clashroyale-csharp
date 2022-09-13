@@ -21,7 +21,8 @@ public class CountDownControllerTest
         Assert.That(this._controller.GetTime(), Is.EqualTo(90));
         Thread.Sleep(5050);
         Assert.That(this._controller.GetTime(), Is.EqualTo(85));
-        this._controller.SetTime();
+        this._controller.ResetTime();
         Assert.That(this._controller.GetTime(), Is.EqualTo(90));
+        this._controller.SetRunFalse();
     }
 }
