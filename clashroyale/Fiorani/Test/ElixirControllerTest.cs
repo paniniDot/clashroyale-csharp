@@ -18,9 +18,12 @@ public class ElixirControllerTest
     {
         Assert.NotNull(this._controller);
         Assert.That(this._controller.GetElixir(), Is.EqualTo(0));
-        Thread.Sleep(5050);
+        Thread.Sleep(5500);
         Assert.That(this._controller.GetElixir(), Is.EqualTo(5));
-        this._controller.SetElixir();
+        this._controller.DecrementElixir(5);
         Assert.That(this._controller.GetElixir(), Is.EqualTo(0));
+        this._controller.ResetElixir();
+        Assert.That(this._controller.GetElixir(), Is.EqualTo(0));
+        this._controller.SetRunFalse();
     }
 }

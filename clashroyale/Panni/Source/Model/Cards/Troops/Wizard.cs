@@ -30,4 +30,9 @@ public class Wizard : Troop
             _ => new Wizard(user, position, 12000, 100)
         };
     }
+
+    public override Card CreateAnother(Vector2 position)
+    {
+        return Wizard.Create(this.Owner, position);
+    }
 }

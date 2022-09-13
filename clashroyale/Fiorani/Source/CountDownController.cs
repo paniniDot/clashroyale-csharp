@@ -1,11 +1,20 @@
 ﻿namespace Fiorani.Source;
 
+/// <summary>
+/// Utility class for CountDown in game.
+/// </summary>
 public class CountDownController
 {
+    /// <summary>
+    /// Game will least 90 seconds.
+    /// </summary>
     private static int _time;
     private const int DefaultTime = 90;
     private static bool _run;
 
+    /// <summary>
+    /// build an countdown controller.
+    /// </summary>
     public CountDownController()
     {
         _time = 90;
@@ -22,6 +31,7 @@ public class CountDownController
             {
                 _time--;
             }
+
             Console.WriteLine("Time " + _time);
         }
     }
@@ -35,16 +45,22 @@ public class CountDownController
         thread.Start();
     }
 
+    /// <returns>the remaining seconds before game ends.</returns>
     public int GetTime()
     {
         return _time;
     }
 
-    public void SetTime()
+    /// <summary>
+    /// Restart the timer.
+    /// </summary>
+    public void ResetTime()
     {
         _time = DefaultTime;
     }
-
+    /// <summary>
+    /// set run to false.
+    /// </summary>
     public void SetRunFalse()
     {
         _run = false;

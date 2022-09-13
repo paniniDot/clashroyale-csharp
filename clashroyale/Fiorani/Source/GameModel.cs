@@ -1,5 +1,6 @@
 ﻿using Panni.Source.Model;
 using Panni.Source.Model.Cards;
+using Panni.Source.Model.Towers;
 using Panni.Source.Model.Users;
 using Panni.Source.Utilities;
 using Vector2 = System.Numerics.Vector2;
@@ -47,9 +48,9 @@ public abstract class GameModel
         var leftTowerPosition = new Vector2(238, 356);
         var rightTowerPosition = new Vector2(448, 356);
         var centralTowerPosition = new Vector2(344, 310);
-        towers.Add(QueenTower.create(user, leftTowerPosition));
-        towers.Add(QueenTower.create(user, rightTowerPosition));
-        towers.Add(KingTower.create(user, centralTowerPosition));
+        towers.Add(QueenTower.Create(user, leftTowerPosition));
+        towers.Add(QueenTower.Create(user, rightTowerPosition));
+        towers.Add(KingTower.Create(user, centralTowerPosition));
         return towers;
     }
 
@@ -117,8 +118,8 @@ public abstract class GameModel
         {
             return Optional<Card>.Empty();
         }
-
-        var nextCard = this._playerCardQueue.Remove(0).CreateAnother(origin);
+        var nextCard = this._playerCardQueue[0].CreateAnother(origin);
+        this._playerCardQueue.RemoveAt(0);
         this._playerChoosableCards.Add(nextCard);
         return Optional<Card>.Of(nextCard);
     }
@@ -186,7 +187,7 @@ public abstract class GameModel
    */
     protected bool IsTower(IAttackable target)
     {
-        return target.GetType().Equals(QueenTower.GetType()) || target.GetType().Equals(KingTower.GetType());
+        return target is QueenTower or KingTower;
     }
 
     /**
@@ -198,7 +199,8 @@ public abstract class GameModel
    */
     protected bool IsUserTheOwner(IAttackable target)
     {
-        return target.Owner().equals(GlobalData.USER);
+        return true;
+        //return target.Owner().equals(GlobalData.USER);
     }
 
     /**
@@ -207,7 +209,7 @@ public abstract class GameModel
    */
     public List<IAttackable> GetPlayerAttackable()
     {
-        return (List<IAttackable>) this._playerDeployedCards.Union((List<IAttackable>) _playerActiveTowers);
+        return (List<IAttackable>) this._playerDeployedCards.Union<IAttackable>(_playerActiveTowers);
     }
 
     /**

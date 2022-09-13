@@ -73,4 +73,11 @@ public abstract class Card : IAttackable
     {
         return HashCode.Combine(Cost, Position, Range, CurrentHp, Owner, Damage, CurrentTarget);
     }
+
+    /// <summary>
+    /// Create another instance of the same Card.
+    /// </summary>
+    /// <param name="position">The position where the new instance has to be placed.</param>
+    /// <returns>The new instance.</returns>
+    public abstract Card CreateAnother(Vector2 position);
 }
