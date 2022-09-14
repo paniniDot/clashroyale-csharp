@@ -1,8 +1,10 @@
-﻿using Panni.Source.Model.Cards.Troops;
-using Panni.Source.Model.User.User;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Numerics;
+using System.Text;
+using Panni.Source.Model.Cards.Troops;
+using Panni.source.Model.Cards;
+using Panni.Source.Model.User;
 
 namespace Salvato.Source
 {
@@ -44,5 +46,8 @@ namespace Salvato.Source
                 ["AS_CARD"] = new List<string> { "cards" + Path.DirectorySeparatorChar + "BarbariansCard.png" }
             };
 
+        public override Card CreateAnother(Vector2 position) => Create(
+                    this.Owner,
+                    position);
     }
 }

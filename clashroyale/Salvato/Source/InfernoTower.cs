@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
-using Panni.Source.Model.Cards.Buildings.Building;
-using Panni.Source.Model.User.User;
+using Panni.Source.Model.Cards.Buildings;
+using Panni.source.Model.Cards;
+using Panni.Source.Model.User;
 
 namespace Salvato.Source
 {
@@ -59,5 +59,9 @@ namespace Salvato.Source
                 ["ENEMY_FIGHTING"] = new List<string> { InfernoTower.BotAtt + "0.png", InfernoTower.BotAtt + "1.png", InfernoTower.BotAtt + "2.png", InfernoTower.BotAtt + "3.png" },
                 ["AS_CARD"] = new List<string> { "cards" + Path.DirectorySeparatorChar + "InfernoTowerCard.png" }
             };
+
+        public override Card CreateAnother(Vector2 position) => Create(
+            this.Owner,
+            position);
     }
 }
