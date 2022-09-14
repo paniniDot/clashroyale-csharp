@@ -1,105 +1,110 @@
-﻿using System.Numerics;
+﻿using System.Collections;
+using System.Collections.Immutable;
+using System.Numerics;
+using Panni.Source.Model.Cards;
+using Panni.Source.Model.Cards.Troops;
 
 namespace Bollini.Source.Model.Deck
 {
 public sealed class PlayersDeck : BasicDeck {
 
   private static readonly PlayersDeck _DECK = new PlayersDeck();
-  public Map<String, Card> DeckMap { get; }
-  public Map<String, Card> CardsMap { get; }
+  public IDictionary<string, Card> DeckMap { get; }
+  public IDictionary<string, Card> CardsMap { get; }
 
-  /**
-   * initialize basic cards and decks.
-   */
+  /// <summary>
+  /// initialize basic cards and decks.
+  /// </summary>
   private PlayersDeck() {
-    deckMap = new HashMap<String, Card>();
-    deckMap.put("Barbarian", Barbarian.create(GlobalData.USER, newPositionFree()));
-    deckMap.put("Giant", Giant.create(GlobalData.USER, newPositionFree()));
-    deckMap.put("InfernoTower", InfernoTower.create(GlobalData.USER, newPositionFree()));
-    deckMap.put("Wizard", Wizard.create(GlobalData.USER, newPositionFree())); 
-    cardsMap = new HashMap<String, Card>();
-    cardsMap.put("Archer", Archer.create(GlobalData.USER, new Vector2(0, 0)));
-    cardsMap.put("MiniPekka", MiniPekka.create(GlobalData.USER, new Vector2(0, 0)));
-    cardsMap.put("Valkrie", Valkyrie.create(GlobalData.USER, new Vector2(0, 0)));
+      DeckMap = new Dictionary<string, Card>();
+      DeckMap.Add("Barbarian", Wizard.Create(GlobalData.User, NewPositionFree()));
+      DeckMap.Add("Giant", Wizard.Create(GlobalData.User, NewPositionFree()));
+      DeckMap.Add("InfernoTower", Wizard.Create(GlobalData.User, NewPositionFree()));
+      DeckMap.Add("Wizard", Wizard.Create(GlobalData.User, NewPositionFree()));
+      CardsMap = new Dictionary<string, Card>();
+      CardsMap.Add("Archer", Wizard.Create(GlobalData.User, new Vector2(0, 0)));
+      CardsMap.Add("MiniPekka", Wizard.Create(GlobalData.User, new Vector2(0, 0)));
+      CardsMap.Add("Valkrie", Wizard.Create(GlobalData.User, new Vector2(0, 0)));
+
 
   }
 
-/**
-   * 
-   * @param select
-   * @return deckMap
-   */
-  public Map<String, Card> AddDeck(readonly String select) {
-    DeckMap.put(select, cardsMap.get(select));
+  /// 
+  /// <param name="select"> </param>
+  /// <returns> deckMap </returns>
+  public IDictionary<string, Card> AddDeck(in string select) {
+    DeckMap.Add(select, CardsMap[select]);
     return DeckMap;
   }
-  /**
-   * 
-   * @param select
-   * @return cardsMap
-   */
-  public Map<String, Card> AddCard(readonly String select) {
-    CardsMap.put(select, deckMap.get(select));
+  /// 
+  /// <param name="select"> </param>
+  /// <returns> cardsMap </returns>
+  public IDictionary<string, Card> AddCard(in string select) {
+    CardsMap.Add(select, DeckMap[select]);
     return CardsMap;
   }
-  /**
-   * 
-   * @param select
-   * @return cardsMap
-   */
-  public Map<String, Card> RemoveCard(readonly String select) {
-    CardsMap.remove(select);
+  /// 
+  /// <param name="select"> </param>
+  /// <returns> cardsMap </returns>
+  public IDictionary<string, Card> RemoveCard(in string select) {
+    CardsMap.Remove(select);
     return CardsMap;
   }
 
-  /**
-   * 
-   * @param select
-   * @return deckMap
-   */
-  public Map<String, Card> RemoveDeckCard(readonly String select) {
-    DeckMap.remove(select);
+  /// 
+  /// <param name="select"> </param>
+  /// <returns> deckMap </returns>
+
+  public IDictionary<string, Card> RemoveDeckCard(in string select) {
+    DeckMap.Remove(select);
     return DeckMap;
   }
 
-  /**
-   * 
-   * @return List<Card> from map
-   */
+  /// 
+  /// <returns> List<Card> from map </returns>
   public List<Card> CardList()
   {
-      return DeckMap.entrySet().stream()
-          .map(e->e.getValue())
-          .collect(Collectors.toList());
+    var c = new List<Card>();
+    foreach (var e in DeckMap.Values)
+    {
+      c.Add(e);
+    }
+    return c;
   }
 
-  /**
-   * 
-   * @return List<String> from key deckmap
-   */
-public List<String> namesCardsDeck()
+  /// 
+  /// <returns> List<String> from key deckmap </returns>
+  public IList<string> namesCardsDeck()
 {
-    return DeckMap.entrySet().stream()
-        .map(e->e.getKey())
-        .collect(Collectors.toList());
+  var c = new List<string>();
+  foreach (var e in DeckMap.Keys)
+  {
+    c.Add(e);
+  }
+  return c;
 }
 
-/*  
- *
-   * 
-   * @return List<String> from key cardsmap
-   */
-  public List<String> namesCardsCard() {
-    return CardsMap.entrySet().stream()
-        .map(e -> e.getKey())
-        .collect(Collectors.toList());
+  /// 
+  /// <returns> List<String> from key cardsmap </returns>
+  public IList<string> namesCardsCard() {
+    var c = new List<string>();
+    foreach (var e in CardsMap.Keys)
+    {
+      c.Add(e);
+    }
+
+    return c;
   }
 
-  /**
-   * 
-   * 
-   * @return the only DECK
-   */
-  public static PlayersDeck getInstance() => DECK;
+  /// 
+  /// 
+  /// <returns> the only DECK </returns>
+  public static PlayersDeck Instance
+  {
+    get
+    {
+      return _DECK;
+    }
+  }
 }
 }
