@@ -6,6 +6,7 @@ namespace Fiorani.Test.Controller;
 public class ElixirControllerTest
 {
     private ElixirController _controller;
+
     /// <summary>
     /// Initialize ElixirController.
     /// </summary>
@@ -14,6 +15,7 @@ public class ElixirControllerTest
     {
         this._controller = new ElixirController();
     }
+
     /// <summary>
     /// test controller after 5 seconds and reset.
     /// </summary>

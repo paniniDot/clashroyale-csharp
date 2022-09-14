@@ -6,6 +6,7 @@ namespace Fiorani.Test.Controller;
 public class CountDownControllerTest
 {
     private CountDownController _controller;
+
     /// <summary>
     /// Initialize CountDownController.
     /// </summary>
@@ -14,6 +15,7 @@ public class CountDownControllerTest
     {
         this._controller = new CountDownController();
     }
+
     /// <summary>
     /// test controller after 5 seconds and reset.
     /// </summary>

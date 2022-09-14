@@ -6,6 +6,7 @@ using Panni.Source.Model.Users;
 using Panni.Source.Utilities;
 
 namespace Fiorani.Source.Model;
+
 /// <summary>
 /// An implementation of GameController in which the user plays against a bot.
 /// </summary>
@@ -16,6 +17,7 @@ public class BotGameModel : GameModel
     public List<Card> BotDeployedCards { get; }
     public List<Card> BotChoosableCards { get; }
     public List<Tower> BotActiveTowers { get; }
+
     /// <param name="playerCards">the player deck.</param>
     /// <param name="botCards">{@inheritDoc}.</param>
     public BotGameModel(List<Card> playerCards, List<Card> botCards, User player, Bot bot) : base(playerCards, player)
@@ -44,6 +46,7 @@ public class BotGameModel : GameModel
         towers.Add(KingTower.Create(bot, centralTowerPosition));
         return towers;
     }
+
     /// <summary>
     /// Deploys a card of the bot.
     /// </summary>
@@ -57,6 +60,7 @@ public class BotGameModel : GameModel
             this.BotDeployedCards.Add(card);
         }
     }
+
     /// <param name="origin">the start position of the new card.</param>
     /// <returns>an {@link Optional} of the first card entered in the queue.</returns>
     public Optional<Card> GetBotNextQueuedCard(Vector2 origin)
@@ -71,6 +75,7 @@ public class BotGameModel : GameModel
         this.BotChoosableCards.Add(nextCard);
         return Optional<Card>.Of(nextCard);
     }
+
     /// <summary>
     /// Removes a card from the map.
     /// </summary>
@@ -82,6 +87,7 @@ public class BotGameModel : GameModel
             this.BotDeployedCards.Remove(card);
         }
     }
+
     /// <summary>
     /// If not already, destroys a bot tower.
     /// </summary>
@@ -93,6 +99,7 @@ public class BotGameModel : GameModel
             this.BotActiveTowers.Remove(tower);
         }
     }
+
     /// <returns>a list of attackable elements of the bot.</returns>
     public List<IAttackable> GetBotAttackable()
     {
