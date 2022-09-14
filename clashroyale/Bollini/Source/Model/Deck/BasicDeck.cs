@@ -18,7 +18,7 @@ public class BasicDeck
    */
     protected BasicDeck() 
     {
-        PositionFree = new HashSet<>(Arrays.asList(new Vector2(POSCARD1, HEIGHTCARD), new Vector2(POSCARD2, HEIGHTCARD), new Vector2(POSCARD3, HEIGHTCARD), new Vector2(POSCARD4, HEIGHTCARD)));
+        PositionFree = new HashSet<Vector2>(Arrays.asList(new Vector2(POSCARD1, HEIGHTCARD), new Vector2(POSCARD2, HEIGHTCARD), new Vector2(POSCARD3, HEIGHTCARD), new Vector2(POSCARD4, HEIGHTCARD)));
     }
     
     /**
@@ -27,7 +27,7 @@ public class BasicDeck
    */
     public Vector2 NewPositionFree() 
     {
-        readonly Iterator<Vector2> i = getPositionFree().iterator();
+        readonly IEnumerable<Vector2> i = PositionFree;
         readonly Vector2 tmp  =  i.next();
         getPositionFree().remove(tmp);
         return tmp;

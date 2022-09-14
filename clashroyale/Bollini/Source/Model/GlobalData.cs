@@ -24,12 +24,12 @@ namespace Bollini.Source.Model
     /// Provides a bot.
     ///</summary> 
     public static readonly Bot Bot = new Bot();
-
+     
     /// <summary>
     /// Provides the Bot deck.
     ///</summary>
-    public static readonly List<Card> BotDeck = new List<Card>();
-    BotDeck.Add(Wizard.Create(Bot, new Vector2(100, 1000)); 
+    public static readonly List<Card> BotDeck = List<Card>.of(
+    Wizard.Create(Bot, new Vector2(100, 1000)), 
     Wizard.Create(Bot, new Vector2(200, 1000)), 
     Wizard.Create(Bot, new Vector2(300, 1000)), 
     Wizard.Create(Bot, new Vector2(400, 1000)));
