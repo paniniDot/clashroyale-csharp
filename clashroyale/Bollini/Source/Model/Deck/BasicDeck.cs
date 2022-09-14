@@ -11,25 +11,30 @@ public class BasicDeck
     private static readonly int _POSCARD3 = 400;
     private static readonly int _POSCARD4 = 500;
 
-    public Set<Vector2> PositionFree { get; }
+    public ISet<Vector2> PositionFree { get; }
 
-    /**
-   * Constructor for position free, protected in order to cannot instantiate it from outside its package. 
-   */
+    /// <summary>
+    /// Constructor for position free, protected in order to cannot instantiate it from outside its package. 
+    /// </summary>
     protected BasicDeck() 
     {
-        PositionFree = new HashSet<Vector2>(Arrays.asList(new Vector2(POSCARD1, HEIGHTCARD), new Vector2(POSCARD2, HEIGHTCARD), new Vector2(POSCARD3, HEIGHTCARD), new Vector2(POSCARD4, HEIGHTCARD)));
+        PositionFree = new HashSet<Vector2>
+        {
+            new Vector2(_POSCARD1, _HEIGHTCARD),
+            new Vector2(_POSCARD2, _HEIGHTCARD),
+            new Vector2(_POSCARD3, _HEIGHTCARD),
+            new Vector2(_POSCARD4, _HEIGHTCARD)
+        };
     }
     
-    /**
-   * 
-   * @return the first free position and deletes it from those available
-   */
+
+    /// 
+    /// <returns> the first free position and deletes it from those available </returns>
     public Vector2 NewPositionFree() 
     {
-        readonly IEnumerable<Vector2> i = PositionFree;
-        readonly Vector2 tmp  =  i.next();
-        getPositionFree().remove(tmp);
+        IEnumerator<Vector2> i = PositionFree.GetEnumerator();
+        Vector2 tmp  =  i.Current;
+        PositionFree.Remove(tmp);
         return tmp;
     }
 }
