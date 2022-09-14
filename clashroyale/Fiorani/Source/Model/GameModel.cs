@@ -1,4 +1,5 @@
-﻿using Panni.Source.Model;
+﻿using Bollini.Source.Model;
+using Panni.Source.Model;
 using Panni.Source.Model.Cards;
 using Panni.Source.Model.Towers;
 using Panni.Source.Model.Users;
@@ -133,8 +134,7 @@ public abstract class GameModel
     /// <returns>whether the user is the owner of this target or not.</returns>
     protected bool IsUserTheOwner(IAttackable target)
     {
-        return true;
-        //return target.Owner().equals(GlobalData.USER);
+        return target.Owner.Equals(GlobalData.USER);
     }
 
     /// <summary>
