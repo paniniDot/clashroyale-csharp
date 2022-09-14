@@ -14,11 +14,11 @@ public abstract class GameModel
    */
     protected const int ChoosableCards = 4;
 
-    private List<Card> _playerCards;
-    private List<Card> _playerCardQueue;
-    private List<Card> _playerDeployedCards;
-    private List<Card> _playerChoosableCards;
-    private List<Tower> _playerActiveTowers;
+    public List<Card> PlayerCards { get; }
+    public List<Card> PlayerCardQueue { get; }
+    public List<Card> PlayerDeployedCards { get; }
+    public List<Card> PlayerChoosableCards { get; }
+    public List<Tower> PlayerActiveTowers { get; }
 
     /**
    * 
@@ -29,17 +29,17 @@ public abstract class GameModel
    */
     public GameModel(List<Card> playerCards, User user)
     {
-        _playerCards = playerCards.ToList();
-        _playerCardQueue = playerCards.ToList();
-        _playerDeployedCards = new List<Card>();
-        _playerChoosableCards = new List<Card>();
+        PlayerCards = playerCards.ToList();
+        PlayerCardQueue = playerCards.ToList();
+        PlayerDeployedCards = new List<Card>();
+        PlayerChoosableCards = new List<Card>();
         Enumerable.Range(0, ChoosableCards).ToList()
             .ForEach(i =>
             {
-                this._playerChoosableCards.Add(_playerCardQueue[0]);
-                _playerCardQueue.RemoveAt(0);
+                this.PlayerChoosableCards.Add(PlayerCardQueue[0]);
+                PlayerCardQueue.RemoveAt(0);
             });
-        this._playerActiveTowers = this.GetPlayerTowers(user);
+        this.PlayerActiveTowers = this.GetPlayerTowers(user);
     }
 
     private List<Tower> GetPlayerTowers(User user)
@@ -54,43 +54,6 @@ public abstract class GameModel
         return towers;
     }
 
-
-    /**
-   * 
-   * @return a list of every card used from the player during the match.
-   */
-    public List<Card> GetPlayerDeck()
-    {
-        return this._playerCards;
-    }
-
-    /**
-   * 
-   * @return the queued cards of the player.
-   */
-    public List<Card> GetPlayerCardQueue()
-    {
-        return this._playerCardQueue;
-    }
-
-    /**
-   * 
-   * @return a list of user currently deployed cards.
-   */
-    public List<Card> GetPlayerDeployedCards()
-    {
-        return this._playerDeployedCards;
-    }
-
-    /**
-   * 
-   * @return a list of user currently choosable cards.
-   */
-    public List<Card> GetPlayerChoosableCards()
-    {
-        return this._playerChoosableCards;
-    }
-
     /**
    * Deploys a card of the player.
    * @param card
@@ -98,11 +61,11 @@ public abstract class GameModel
    */
     public void DeployPlayerCard(Card card)
     {
-        if (this._playerChoosableCards.Contains(card))
+        if (this.PlayerChoosableCards.Contains(card))
         {
-            this._playerChoosableCards.Remove(card);
-            this._playerCardQueue.Add(card);
-            this._playerDeployedCards.Add(card);
+            this.PlayerChoosableCards.Remove(card);
+            this.PlayerCardQueue.Add(card);
+            this.PlayerDeployedCards.Add(card);
         }
     }
 
@@ -114,13 +77,14 @@ public abstract class GameModel
    */
     public Optional<Card> GetPlayerNextQueuedCard(Vector2 origin)
     {
-        if (this._playerCardQueue.Count == 0)
+        if (this.PlayerCardQueue.Count == 0)
         {
             return Optional<Card>.Empty();
         }
-        var nextCard = this._playerCardQueue[0].CreateAnother(origin);
-        this._playerCardQueue.RemoveAt(0);
-        this._playerChoosableCards.Add(nextCard);
+
+        var nextCard = this.PlayerCardQueue[0].CreateAnother(origin);
+        this.PlayerCardQueue.RemoveAt(0);
+        this.PlayerChoosableCards.Add(nextCard);
         return Optional<Card>.Of(nextCard);
     }
 
@@ -131,20 +95,12 @@ public abstract class GameModel
    */
     public void RemoveUserCardFromMap(Card card)
     {
-        if (this._playerDeployedCards.Contains(card))
+        if (this.PlayerDeployedCards.Contains(card))
         {
-            this._playerDeployedCards.Remove(card);
+            this.PlayerDeployedCards.Remove(card);
         }
     }
 
-    /**
-   * 
-   * @return the currently active towers of the user.
-   */
-    public List<Tower> GetPlayerActiveTowers()
-    {
-        return this._playerActiveTowers;
-    }
 
     /**
    * If not already, destroys a user tower.
@@ -154,9 +110,9 @@ public abstract class GameModel
    */
     public void DestroyUserTower(Tower tower)
     {
-        if (this._playerActiveTowers.Contains(tower))
+        if (this.PlayerActiveTowers.Contains(tower))
         {
-            this._playerActiveTowers.Remove(tower);
+            this.PlayerActiveTowers.Remove(tower);
         }
     }
 
@@ -209,7 +165,7 @@ public abstract class GameModel
    */
     public List<IAttackable> GetPlayerAttackable()
     {
-        return new List<IAttackable>(this._playerDeployedCards.Union<IAttackable>(_playerActiveTowers));
+        return new List<IAttackable>(this.PlayerDeployedCards.Union<IAttackable>(PlayerActiveTowers));
     }
 
     /**

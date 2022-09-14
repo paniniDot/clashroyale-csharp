@@ -12,6 +12,7 @@ public class BotGameModelTest
     private BotGameModel _model;
     private List<Card> _botDeck;
     private List<Card> _playerDeck;
+
     [SetUp]
     public void Initialize()
     {
@@ -33,55 +34,56 @@ public class BotGameModelTest
     [Test]
     public void PlayerTest()
     {
-        Assert.That(this._model.GetPlayerDeck().Count, Is.EqualTo(4));
-        Assert.That(this._model.GetPlayerCardQueue().Count, Is.EqualTo(0));
-        Assert.That(this._model.GetPlayerDeployedCards().Count, Is.EqualTo(0));
-        Assert.That(this._model.GetPlayerChoosableCards().Count, Is.EqualTo(4));
-        Assert.That(this._model.GetPlayerActiveTowers().Count, Is.EqualTo(3));
+        Assert.That(this._model.PlayerCards.Count, Is.EqualTo(4));
+        Assert.That(this._model.PlayerCardQueue.Count, Is.EqualTo(0));
+        Assert.That(this._model.PlayerDeployedCards.Count, Is.EqualTo(0));
+        Assert.That(this._model.PlayerChoosableCards.Count, Is.EqualTo(4));
+        Assert.That(this._model.PlayerActiveTowers.Count, Is.EqualTo(3));
         Assert.That(this._model.GetPlayerAttackable().Count, Is.EqualTo(3));
     }
-    
+
     [Test]
     public void BotTest()
     {
-        Assert.That(this._model.GetBotDeck().Count, Is.EqualTo(4));
-        Assert.That(this._model.GetPBotCardQueue().Count, Is.EqualTo(0));
-        Assert.That(this._model.GetBotDeployedCards().Count, Is.EqualTo(0));
-        Assert.That(this._model.GetBotChoosableCards().Count, Is.EqualTo(4));
-        Assert.That(this._model.GetBotActiveTowers().Count, Is.EqualTo(3));
+        Assert.That(this._model.BotCards.Count, Is.EqualTo(4));
+        Assert.That(this._model.BotCardQueue.Count, Is.EqualTo(0));
+        Assert.That(this._model.BotDeployedCards.Count, Is.EqualTo(0));
+        Assert.That(this._model.BotChoosableCards.Count, Is.EqualTo(4));
+        Assert.That(this._model.BotActiveTowers.Count, Is.EqualTo(3));
         Assert.That(this._model.GetBotAttackable().Count, Is.EqualTo(3));
     }
-    
+
     [Test]
     public void TargetTest()
     {
-        this._model.DeployBotCard(this._model.GetBotChoosableCards()[0]);
+        this._model.DeployBotCard(this._model.BotChoosableCards[0]);
         Assert.That(this._model.GetBotAttackable().Count, Is.EqualTo(4));
-        Assert.That(this._model.GetBotDeployedCards().Count, Is.EqualTo(1));
-        this._model.DeployPlayerCard(this._model.GetPlayerChoosableCards()[0]);
+        Assert.That(this._model.BotDeployedCards.Count, Is.EqualTo(1));
+        this._model.BotDeployedCards[0].Position = new Vector2(350, 350);
+
+        this._model.DeployPlayerCard(this._model.PlayerChoosableCards[0]);
         Assert.That(this._model.GetPlayerAttackable().Count, Is.EqualTo(4));
-        Assert.That(this._model.GetPlayerDeployedCards().Count, Is.EqualTo(1));
-        this._model.GetPlayerDeployedCards()[0].Position = new Vector2(350, 350); 
-        this._model.GetBotDeployedCards()[0].Position = new Vector2(350, 350); 
+        Assert.That(this._model.PlayerDeployedCards.Count, Is.EqualTo(1));
+        this._model.PlayerDeployedCards[0].Position = new Vector2(350, 350);
+
         this._model.FindAttackableTargets();
         while (true)
         {
             this._model.HandleAttackTargets();
-            if (!this._model.GetBotDeployedCards()[0].IsDead())
+            if (!this._model.BotDeployedCards[0].IsDead())
             {
-                this._model.RemoveBotCardFromMap(this._model.GetBotDeployedCards()[0]);
-                Assert.That(this._model.GetBotDeployedCards().Count, Is.EqualTo(0));
+                this._model.RemoveBotCardFromMap(this._model.BotDeployedCards[0]);
+                Assert.That(this._model.BotDeployedCards.Count, Is.EqualTo(0));
                 Assert.That(this._model.GetBotAttackable().Count, Is.EqualTo(3));
                 break;
-            } else if (!this._model.GetPlayerDeployedCards()[0].IsDead())
+            }
+            else if (!this._model.PlayerDeployedCards[0].IsDead())
             {
-                this._model.RemoveUserCardFromMap(this._model.GetPlayerDeployedCards()[0]);
-                Assert.That(this._model.GetPlayerDeployedCards().Count, Is.EqualTo(0));
+                this._model.RemoveUserCardFromMap(this._model.PlayerDeployedCards[0]);
+                Assert.That(this._model.PlayerDeployedCards.Count, Is.EqualTo(0));
                 Assert.That(this._model.GetPlayerAttackable().Count, Is.EqualTo(3));
                 break;
             }
         }
-        
-        
     }
 }

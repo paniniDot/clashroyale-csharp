@@ -10,7 +10,6 @@ public class CountDownControllerTest
     [SetUp]
     public void InitializeCountDownController()
     {
-        
         this._controller = new CountDownController();
     }
 
@@ -18,11 +17,11 @@ public class CountDownControllerTest
     public void Test()
     {
         Assert.NotNull(this._controller);
-        Assert.That(this._controller.GetTime(), Is.EqualTo(90));
+        Assert.That(this._controller.Time, Is.EqualTo(90));
         Thread.Sleep(5050);
-        Assert.That(this._controller.GetTime(), Is.EqualTo(85));
+        Assert.That(this._controller.Time, Is.EqualTo(85));
         this._controller.ResetTime();
-        Assert.That(this._controller.GetTime(), Is.EqualTo(90));
+        Assert.That(this._controller.Time, Is.EqualTo(90));
         this._controller.SetRunFalse();
     }
 }

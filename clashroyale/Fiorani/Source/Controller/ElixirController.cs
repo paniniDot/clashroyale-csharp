@@ -1,61 +1,57 @@
 ﻿namespace Fiorani.Source.Controller;
+
 /// <summary>
 /// Utility class for elixir in game.
 /// </summary>
 public class ElixirController
 {
-    private static int _elixir;
-    private static bool _run;
+    public int Elixir { get; private set; }
+    private bool _run;
+
     /// <summary>
     /// build an elixir controller.
     /// </summary>
     public ElixirController()
     {
-        _elixir = 0;
-        _run = true;
-        RunningThread();
-    }
-
-    private static void Run()
-    {
-        while (_run)
-        {
-            Thread.Sleep(1000);
-            if (_elixir < 10)
-            {
-                _elixir++;
-            }
-            Console.WriteLine("Elixir " + _elixir);
-        }
-    }
-
-    private static void RunningThread()
-    {
+        this.Elixir = 0;
+        this._run = true;
         var thread = new Thread(Run)
         {
             IsBackground = false
         };
         thread.Start();
     }
-    /// <returns>the current elixir owned.</returns>
-    public int GetElixir()
+
+    private void Run()
     {
-        return _elixir;
+        while (this._run)
+        {
+            Thread.Sleep(1000);
+            if (this.Elixir < 10)
+            {
+                this.Elixir++;
+            }
+
+            Console.WriteLine("Elixir " + this.Elixir);
+        }
     }
+
     /// <summary>
     /// set elixir value to 0.
     /// </summary>
     public void ResetElixir()
     {
-        _elixir = 0;
+        this.Elixir = 0;
     }
+
     /// <summary>
     /// set run to false.
     /// </summary>
     public void SetRunFalse()
     {
-        _run = false;
+        this._run = false;
     }
+
     /// <summary>
     /// decrement elixir if enough.
     /// </summary>
@@ -63,9 +59,9 @@ public class ElixirController
     /// /// <returns>true if decremented.</returns>
     public bool DecrementElixir(int n)
     {
-        if (_elixir >= n)
+        if (this.Elixir >= n)
         {
-            _elixir -= n;
+            this.Elixir -= n;
             return true;
         }
 
