@@ -74,7 +74,7 @@ public sealed class PlayersDeck : BasicDeck {
 
   /// 
   /// <returns> List<String> from key deckmap </returns>
-  public IList<string> namesCardsDeck()
+  public IList<string> NamesCardsDeck()
 {
   var c = new List<string>();
   foreach (var e in DeckMap.Keys)
@@ -85,8 +85,8 @@ public sealed class PlayersDeck : BasicDeck {
 }
 
   /// 
-  /// <returns> List<String> from key cardsmap </returns>
-  public IList<string> namesCardsCard() {
+  /// <returns> List<string> from key cardsmap </returns>
+  public IList<string> NamesCardsCard() {
     var c = new List<string>();
     foreach (var e in CardsMap.Keys)
     {

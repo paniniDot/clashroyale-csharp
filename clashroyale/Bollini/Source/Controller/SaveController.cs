@@ -7,73 +7,86 @@ namespace Bollini.Source.Controller
  */
 public sealed class SaveController  
 {
-
     private static readonly Gson _GSON = new GsonBuilder().create();
-    private static readonly String _USER_DIR_PATH = System.getProperty("user.home") + File.separator + "royaleData" + File.separator;
-    private static readonly String _FILE_NAME = "user.json";
+    private static readonly string _USER_DIR_PATH =  System.Environment.SetEnvironmentVariable("user.home") + Path.DirectorySeparatorChar + "royaleData" + Path.DirectorySeparatorChar;
+    private const string _FILE_NAME = "user.json";
 
     private SaveController() 
     {
     }
 
-    private static boolean CheckDirectoryExistance() 
+    private static bool CheckDirectoryExistance()
     {
-        return new File(USER_DIR_PATH).exists();
+        return Directory.Exists(_USER_DIR_PATH) || File.Exists(_USER_DIR_PATH);
     }
 
-    private static void CreateDirectory() 
+    private static void CreateDirectory()
     {
-        new File(USER_DIR_PATH).mkdir();
+        Directory.CreateDirectory(_USER_DIR_PATH);
     }
 
-    private static boolean CheckFileExistance() 
+    private static bool CheckFileExistance()
     {
-        return new File(USER_DIR_PATH + File.separator + FILE_NAME).exists();
+        return Directory.Exists(_USER_DIR_PATH + Path.DirectorySeparatorChar + _FILE_NAME) || File.Exists(_USER_DIR_PATH + Path.DirectorySeparatorChar + _FILE_NAME);
     }
-
+    
     private static void CreateFile() 
     {
         try {
-            new File(USER_DIR_PATH + File.separator + FILE_NAME).createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
+            (new File(_USER_DIR_PATH + Path.DirectorySeparatorChar + _FILE_NAME)).CreateNewFile();
+        } 
+        catch (IOException e)
+        {
+            Console.WriteLine(e.ToString());
+            Console.Write(e.StackTrace);
         }
     }
 
-    /**
-   * Load the user from the Json file.
-   * 
-   * @return a {@link User} loaded from file.
-   */
+    /// <summary>
+    /// Load the user from the Json file.
+    /// </summary>
+    /// <returns> a <seealso cref="User"/> loaded from file. </returns>
+
     public static User LoadUser() {
-        if (SaveController.checkDirectoryExistance() && SaveController.checkFileExistance()) 
+        if (SaveController.CheckDirectoryExistance() && SaveController.CheckFileExistance()) 
         {
             try {
-                return GSON.fromJson(new FileReader(new File(USER_DIR_PATH + File.separator + FILE_NAME)), User.class);
-            } catch (IOException e) {
-                e.printStackTrace();
+                return _GSON.fromJson(new StreamReader(_USER_DIR_PATH + Path.DirectorySeparatorChar + _FILE_NAME), typeof(User));
             }
-        } else {
-            SaveController.createDirectory();
-            SaveController.createFile();
+            catch (IOException e) 
+            {
+                Console.WriteLine(e.ToString());
+                Console.Write(e.StackTrace);
+            }
+        }
+        else 
+        {
+            SaveController.CreateDirectory();
+            SaveController.CreateFile();
             return new User("Dream");
         }
         return null;
     }
 
-    /**
-   * Serialize a user in a json file.
-   * 
-   * @param user the {@link User} to be saved.
-   */
-    public static void SaveUser(readonly User user) 
+    /// <summary>
+    /// Serialize a user in a json file.
+    /// </summary>
+    /// <param name="user"> the <seealso cref="User"/> to be saved. </param>
+
+    public static void SaveUser(in User user) 
     {
-        try (FileWriter writer = new FileWriter(new File(USER_DIR_PATH + File.separator + FILE_NAME))) {
-            GSON.toJson(user, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
+        try
+        {
+            using (StreamWriter writer = new StreamWriter(_USER_DIR_PATH + Path.DirectorySeparatorChar + _FILE_NAME))
+            { 
+               _GSON.toJson(user, writer);
+            }
+        } 
+        catch (IOException e)
+        {
+            Console.WriteLine(e.ToString());
+            Console.Write(e.StackTrace);
         }
     }
-
 }
 }
