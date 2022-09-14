@@ -6,7 +6,9 @@ using Panni.Source.Model.Users;
 using Panni.Source.Utilities;
 
 namespace Fiorani.Source.Model;
-
+/// <summary>
+/// An implementation of GameController in which the user plays against a bot.
+/// </summary>
 public class BotGameModel : GameModel
 {
     public List<Card> BotCards { get; }
@@ -14,7 +16,8 @@ public class BotGameModel : GameModel
     public List<Card> BotDeployedCards { get; }
     public List<Card> BotChoosableCards { get; }
     public List<Tower> BotActiveTowers { get; }
-
+    /// <param name="playerCards">the player deck.</param>
+    /// <param name="botCards">{@inheritDoc}.</param>
     public BotGameModel(List<Card> playerCards, List<Card> botCards, User player, Bot bot) : base(playerCards, player)
     {
         this.BotCards = botCards.ToList();
@@ -41,7 +44,10 @@ public class BotGameModel : GameModel
         towers.Add(KingTower.Create(bot, centralTowerPosition));
         return towers;
     }
-
+    /// <summary>
+    /// Deploys a card of the bot.
+    /// </summary>
+    /// <param name="card">the card to be deployed.</param>
     public void DeployBotCard(Card card)
     {
         if (this.BotChoosableCards.Contains(card))
@@ -51,7 +57,8 @@ public class BotGameModel : GameModel
             this.BotDeployedCards.Add(card);
         }
     }
-
+    /// <param name="origin">the start position of the new card.</param>
+    /// <returns>an {@link Optional} of the first card entered in the queue.</returns>
     public Optional<Card> GetBotNextQueuedCard(Vector2 origin)
     {
         if (this.BotCardQueue.Count == 0)
@@ -64,7 +71,10 @@ public class BotGameModel : GameModel
         this.BotChoosableCards.Add(nextCard);
         return Optional<Card>.Of(nextCard);
     }
-
+    /// <summary>
+    /// Removes a card from the map.
+    /// </summary>
+    /// <param name="card">the card to be removed.</param>
     public void RemoveBotCardFromMap(Card card)
     {
         if (this.BotDeployedCards.Contains(card))
@@ -72,7 +82,10 @@ public class BotGameModel : GameModel
             this.BotDeployedCards.Remove(card);
         }
     }
-
+    /// <summary>
+    /// If not already, destroys a bot tower.
+    /// </summary>
+    /// <param name="tower">the tower to be destroyed.</param>
     public void DestroyBotTower(Tower tower)
     {
         if (this.BotActiveTowers.Contains(tower))
@@ -80,7 +93,7 @@ public class BotGameModel : GameModel
             this.BotActiveTowers.Remove(tower);
         }
     }
-
+    /// <returns>a list of attackable elements of the bot.</returns>
     public List<IAttackable> GetBotAttackable()
     {
         return new List<IAttackable>(this.BotDeployedCards.Union<IAttackable>(BotActiveTowers));

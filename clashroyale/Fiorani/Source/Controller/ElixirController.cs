@@ -56,7 +56,7 @@ public class ElixirController
     /// decrement elixir if enough.
     /// </summary>
     /// <param name="n">the amount of elixir to be taken.</param>
-    /// /// <returns>true if decremented.</returns>
+    /// <returns>true if decremented.</returns>
     public bool DecrementElixir(int n)
     {
         if (this.Elixir >= n)

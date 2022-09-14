@@ -7,11 +7,14 @@ using Vector2 = System.Numerics.Vector2;
 
 namespace Fiorani.Source.Model;
 
+/// <summary>
+/// Defines the logic to be used inside the game.
+/// </summary>
 public abstract class GameModel
 {
-    /**
-   * the number of cards that can be chosen in every moment.
-   */
+    /// <summary>
+    /// the number of cards that can be chosen in every moment.
+    /// </summary>
     protected const int ChoosableCards = 4;
 
     public List<Card> PlayerCards { get; }
@@ -20,13 +23,8 @@ public abstract class GameModel
     public List<Card> PlayerChoosableCards { get; }
     public List<Tower> PlayerActiveTowers { get; }
 
-    /**
-   * 
-   * @param playerCards
-   *              the player deck.
-   * @param user
-   *              the user who is playing.
-   */
+    /// <param name="playerCards">the player deck.</param>
+    /// <param name="user">the user who is playing.</param>
     public GameModel(List<Card> playerCards, User user)
     {
         PlayerCards = playerCards.ToList();
@@ -54,11 +52,10 @@ public abstract class GameModel
         return towers;
     }
 
-    /**
-   * Deploys a card of the player.
-   * @param card
-   *           the card to be deployed.
-   */
+    /// <summary>
+    /// Deploys a card of the player.
+    /// </summary>
+    /// <param name="card">the card to be deployed.</param>
     public void DeployPlayerCard(Card card)
     {
         if (this.PlayerChoosableCards.Contains(card))
@@ -69,12 +66,8 @@ public abstract class GameModel
         }
     }
 
-    /**
-   * @param origin 
-                  the start position of the new card.
-   * @return an {@link Optional} of the first card entered in the queue.
-   * 
-   */
+    /// <param name="origin">the start position of the new card.</param>
+    /// <returns>an {@link Optional} of the first card entered in the queue.</returns>
     public Optional<Card> GetPlayerNextQueuedCard(Vector2 origin)
     {
         if (this.PlayerCardQueue.Count == 0)
@@ -88,11 +81,10 @@ public abstract class GameModel
         return Optional<Card>.Of(nextCard);
     }
 
-    /**
-   * Removes a card from the map.
-   * @param card
-   *           the card to be removed.
-   */
+    /// <summary>
+    /// Removes a card from the map.
+    /// </summary>
+    /// <param name="card">the card to be removed.</param>
     public void RemoveUserCardFromMap(Card card)
     {
         if (this.PlayerDeployedCards.Contains(card))
@@ -102,12 +94,10 @@ public abstract class GameModel
     }
 
 
-    /**
-   * If not already, destroys a user tower.
-   * 
-   * @param tower
-   *            the tower to be destroyed.
-   */
+    /// <summary>
+    /// If not already, destroys a user tower.
+    /// </summary>
+    /// <param name="tower">the tower to be destroyed.</param>
     public void DestroyUserTower(Tower tower)
     {
         if (this.PlayerActiveTowers.Contains(tower))
@@ -116,12 +106,10 @@ public abstract class GameModel
         }
     }
 
-    /**
-   * Remove a player attackable from the arena, whether is a tower or a card.
-   * 
-   * @param target
-   *              the attackable to be removed.
-   */
+    /// <summary>
+    /// Remove a player attackable from the arena, whether is a tower or a card.
+    /// </summary>
+    /// <param name="target">the attackable to be removed.</param>
     protected void RemoveUserAttackableFromArena(IAttackable target)
     {
         if (IsTower(target))
@@ -134,47 +122,36 @@ public abstract class GameModel
         }
     }
 
-    /**
-   * 
-   * @param target
-   *              the attackable to find if is tower or not.
-   * @return
-   *              whether the target is a tower or not.
-   */
+    /// <param name="target">the attackable to find if is tower or not.</param>
+    /// <returns>whether the target is a tower or not.</returns>
     protected bool IsTower(IAttackable target)
     {
         return target is QueenTower or KingTower;
     }
 
-    /**
-   * 
-   * @param target
-   *               the attackable to find if the user is the owner.
-   * @return
-   *               whether the user is the owner of this target or not.
-   */
+    /// <param name="target">the attackable to find if the user is the owner.</param>
+    /// <returns>whether the user is the owner of this target or not.</returns>
     protected bool IsUserTheOwner(IAttackable target)
     {
         return true;
         //return target.Owner().equals(GlobalData.USER);
     }
 
-    /**
-   * 
-   * @return a list of attackable elements of the player.
-   */
+    /// <summary>
+    /// a list of attackable elements of the player.
+    /// </summary>
     public List<IAttackable> GetPlayerAttackable()
     {
         return new List<IAttackable>(this.PlayerDeployedCards.Union<IAttackable>(PlayerActiveTowers));
     }
 
-    /**
-   * Find targets, if any, for a user attackables looking for them in the enemy attackables (whether is a bot or real player).
-   */
+    /// <summary>
+    /// Find targets, if any, for a user attackables looking for them in the enemy attackables (whether is a bot or real player).
+    /// </summary>
     public abstract void FindAttackableTargets();
 
-    /**
-   * Handle the attack functionality of both user and enemy attackables (whether is a bot or real player).
-   */
+    /// <summary>
+    /// Handle the attack functionality of both user and enemy attackables (whether is a bot or real player).
+    /// </summary>
     public abstract void HandleAttackTargets();
 }

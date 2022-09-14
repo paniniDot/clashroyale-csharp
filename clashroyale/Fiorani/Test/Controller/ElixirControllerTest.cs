@@ -6,13 +6,17 @@ namespace Fiorani.Test.Controller;
 public class ElixirControllerTest
 {
     private ElixirController _controller;
-
+    /// <summary>
+    /// Initialize ElixirController.
+    /// </summary>
     [SetUp]
-    public void InitializeCountDownController()
+    public void Initialize()
     {
         this._controller = new ElixirController();
     }
-
+    /// <summary>
+    /// test controller after 5 seconds and reset.
+    /// </summary>
     [Test]
     public void Test()
     {

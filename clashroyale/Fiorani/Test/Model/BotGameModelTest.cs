@@ -12,7 +12,9 @@ public class BotGameModelTest
     private BotGameModel _model;
     private List<Card> _botDeck;
     private List<Card> _playerDeck;
-
+    /// <summary>
+    /// initialize list of player cards and bot cards and create a new model.
+    /// </summary>
     [SetUp]
     public void Initialize()
     {
@@ -30,7 +32,9 @@ public class BotGameModelTest
         this._playerDeck.Add(Wizard.Create(user, new Vector2(100, 100)));
         this._model = new BotGameModel(_playerDeck, _botDeck, user, bot);
     }
-
+    /// <summary>
+    /// check if the lists have been created correctly of player.
+    /// </summary>
     [Test]
     public void PlayerTest()
     {
@@ -41,7 +45,9 @@ public class BotGameModelTest
         Assert.That(this._model.PlayerActiveTowers.Count, Is.EqualTo(3));
         Assert.That(this._model.GetPlayerAttackable().Count, Is.EqualTo(3));
     }
-
+    /// <summary>
+    /// check if the lists have been created correctly of bot.
+    /// </summary>
     [Test]
     public void BotTest()
     {
@@ -52,9 +58,11 @@ public class BotGameModelTest
         Assert.That(this._model.BotActiveTowers.Count, Is.EqualTo(3));
         Assert.That(this._model.GetBotAttackable().Count, Is.EqualTo(3));
     }
-
+    /// <summary>
+    /// check if the target is set correctly and if the attack works.
+    /// </summary>
     [Test]
-    public void TargetTest()
+    public void TargetAndAttackTest()
     {
         this._model.DeployBotCard(this._model.BotChoosableCards[0]);
         Assert.That(this._model.GetBotAttackable().Count, Is.EqualTo(4));
